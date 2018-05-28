@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {Card, Icon} from 'react-native-elements'
+import {Card} from 'react-native-elements'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
     Image,
     ImageBackground,
@@ -105,9 +106,8 @@ export default class Change extends React.Component {
             lastName: '',
             birthdate: '',
             language: '',
-            city: '',
-            gender: '',
-            photoName: ''
+            location: '',
+            gender: ''
         }
     }
 
@@ -119,9 +119,9 @@ export default class Change extends React.Component {
                 'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
                 'X-Parse-Session-Token': global.sessionToken
             },
-            body:{
+            body:JSON.stringify({
                 profile: this.state
-            }
+            })
         })
             .then((response) => response.json())
             .then((response) => {
@@ -138,104 +138,110 @@ export default class Change extends React.Component {
     }
 
     onPressTel = (value) => {
+        global.user.phone = value;
         this.setState({phoneNumber: value});
     }
-
-    onPressEmail = (value) => {
-        this.setState({email: value});
-    }
-
     onPressFirst = (value) => {
+        global.user.firstName = value;
         this.setState({firstName: value});
     }
-
     onPressLast = (value) => {
+        global.user.lastName = value;
         this.setState({lastName: value});
     }
-
     onPressBirth = (value) => {
-        this.setState({birthdate: value});
+        global.user.birthdate = value;
+      //  this.setState({birthdate: value});
     }
-
     onPressCity = (value) => {
-
-        this.setState({city: value});
+        global.user.location = value;
+        this.setState({location: value});
     }
-
     onPressGender = (value) => {
+        global.user.gender = value;
         this.setState({gender: value});
     }
-
     onPressLanguage = (value) => {
+        global.user.language = value;
+        this.setState({language: value});
+    }
+
+
+    renderLocation = () => {
         return (
-            <View style={styles.headerContainer}>
-                <ImageBackground
-                    style={styles.headerBackgroundImage}
-                    blurRadius={10}
-                    source={images['background']}
-                >
-                    <View style={styles.headerColumn}>
-                        <Image
-                            source={global.user.avatar}
-                            style={styles.userImage}
-                        />
-                        <TextInput onPress={(value) => {
-                            this.onPressFirst(value)
-                        }} style={styles.userNameText}>{global.user.firstName}</TextInput>
-                        <TextInput onPress={(value) => {
-                            this.onPressLast(value)
-                        }} style={styles.userNameText}>{global.user.lastName}</TextInput>
-                        <View style={styles.userAddressRow}>
-                            <View>
-                                <Icon
-                                    name="place"
-                                    underlayColor="transparent"
-                                    iconStyle={styles.placeIcon}
-                                />
-                            </View>
-                            <View style={styles.userCityRow}>
-                                <TextInput style={styles.userCityText}>
-                                    {global.user.location}
-                                    onPress = {(value) => {
-                                    this.onPressCity(value)
-                                }}
-                                </TextInput>
-                            </View>
-                        </View>
-                    </View>
-                </ImageBackground>
+            <View>
+                <Icon
+                    name="ios-search"
+                    size={20}
+                    color="#000" />
+            <TextInput
+                       placeholder={global.user.location}
+                       underlineColorAndroid="transparent"
+                       clearButtonMode='while-editing'
+                       onChangeText={(value) => {
+                           this.onPressCity(value)
+                       }}
+            />
+            </View>
+        )
+    }
+
+    renderFirstName = () => {
+        return (
+            <View>
+                <Icon
+                    name="ios-search"
+                    size={20}
+                    color="#000" />
+                <TextInput
+                    onChangeText={(value) => {this.onPressFirst(value)}}
+                    placeholder={global.user.firstName}
+                    underlineColorAndroid="transparent"
+                    clearButtonMode='while-editing'/>
+            </View>
+        )
+    }
+
+    renderLastName = () => {
+        return (
+            <View>
+                <Icon
+                    name="ios-search"
+                    size={20}
+                    color="#000" />
+                <TextInput
+                    onChangeText={(value) => {this.onPressLast(value)}}
+                    placeholder={global.user.lastName}
+                    underlineColorAndroid="transparent"
+                    clearButtonMode='while-editing'/>
             </View>
         )
     }
 
     renderTel = () => {
         return (
-            <TextInput>
-                {global.user.phone}
-                onPress = {(value) => {
-                this.onPressTel(value)
-            }}
-            </TextInput>
+            <View>
+                <Icon
+                    name="ios-search"
+                    size={20}
+                    color="#000" />
+                <TextInput
+                    placeholder={global.user.phone}
+                    onChangeText={(value) => {
+                        this.onPressTel(value)
+                    }}
+                    underlineColorAndroid="transparent"
+                    clearButtonMode='while-editing'
+                />
+            </View>
         )
     }
-
-    renderEmail = () => {
-        return (
-            <TextInput>
-                {global.user.email}
-                onPress = {(value) => {
-                this.onPressEmail(value)
-            }}
-            </TextInput>
-        )
-    }
-
     renderGender = () => {
         const data = [{
             value: 'Female',
-        }, {
+            }, {
             value: 'Male',
-        }];
+            }];
 
         return (
             <Dropdown
@@ -249,18 +255,17 @@ export default class Change extends React.Component {
 
     renderLanguage = () => {
         return (
-            <Card>
+            <View>
                 <Icon
-                    containerStyle={{backgroundColor: '#FEA8A1'}}
-                    icon={{
-                        type: 'material',
-                        name: 'language',
-                    }}
-                />
-                <TextInput onPress={(value) => this.onPressLanguage(value)}>
-                    {global.user.language}
-                </TextInput>
-            </Card>
+                    name="ios-search"
+                    size={20}
+                    color="#000" />
+                <TextInput
+                    onChangeText={(value) => {this.onPressLanguage(value)}}
+                    placeholder={global.user.language}
+                    underlineColorAndroid="transparent"
+                    clearButtonMode='while-editing'/>
+            </View>
         )
     }
 
@@ -270,8 +275,7 @@ export default class Change extends React.Component {
                 style={{width: 280}}
                 date={this.state.date}
                 mode="date"
-                placeholder="Birthdate"
-                maxDate="2016-06-01"
+                maxDate="1999-01-01"
                 format="YYYY-MM-DD"
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
@@ -289,7 +293,25 @@ export default class Change extends React.Component {
                 onDateChange={(date) => {
                     this.onPressBirth(date);
                 }}
-            />
+                />
+        )
+    }
+    renderHeader = () => {
+        return (
+            <View style={styles.headerContainer}>
+                <ImageBackground
+                    style={styles.headerBackgroundImage}
+                    blurRadius={10}
+                    source={images['background']}
+                >
+                    <View style={styles.headerColumn}>
+                        <Image
+                            style={styles.userImage}
+                            source={global.user.avatar}
+                        />
+                    </View>
+                </ImageBackground>
+            </View>
         )
     }
 
@@ -299,14 +321,27 @@ export default class Change extends React.Component {
                 <View style={styles.container}>
                     <Card>
                         {this.renderHeader()}
+                    </Card>
+                    <Card>
+                        {this.renderFirstName()}
+                    </Card>
+                    <Card>
+                        {this.renderLastName()}
+                    </Card>
+                    <Card>
                         {this.renderTel()}
-                        {this.renderEmail()}
-                        <Card>
-                            {this.renderGender()}
-                            {this.renderBirthday()}
-                            {this.renderLanguage()}
-                        </Card>
-
+                    </Card>
+                    <Card>
+                        {this.renderLocation()}
+                    </Card>
+                    <Card>
+                        {this.renderGender()}
+                    </Card>
+                    <Card>
+                        {this.renderBirthday()}
+                    </Card>
+                    <Card>
+                        {this.renderLanguage()}
                     </Card>
 
                     <TouchableHighlight onPress={this.handleChanges}>

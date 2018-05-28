@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Card, Icon } from 'react-native-elements'
+import { Card } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   Image,
   ImageBackground,

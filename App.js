@@ -26,7 +26,6 @@ function applicationInitialize() {
         }
 
         componentDidMount() {
-            alert(global.ip);
             Keyboard.dismiss();
             Actions.intro();
         }

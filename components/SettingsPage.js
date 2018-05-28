@@ -92,10 +92,7 @@ export default class SettingsPage extends React.Component {
                 leftIcon={
                     <Icon
                         containerStyle={{ backgroundColor: '#57DCE7' }}
-                        icon={{
-                            type: 'material',
-                            name: 'person',
-                        }}
+                        name='md-person'
                     />
                 }
             />
@@ -112,10 +109,7 @@ export default class SettingsPage extends React.Component {
                   containerStyle={{
                     backgroundColor: '#FFADF2',
                   }}
-                  icon={{
-                    type: 'material',
-                    name: 'notifications',
-                  }}
+                    name='notifications'
                 />
               }
             />
@@ -127,10 +121,8 @@ export default class SettingsPage extends React.Component {
               leftIcon={
                 <Icon
                   containerStyle={{ backgroundColor: '#57DCE7' }}
-                  icon={{
-                    type: 'material',
-                    name: 'place',
-                  }}
+
+                    name='place'
                 />
               }
             />
@@ -142,10 +134,8 @@ export default class SettingsPage extends React.Component {
               leftIcon={
                 <Icon
                   containerStyle={{ backgroundColor: '#FEA8A1' }}
-                  icon={{
-                    type: 'material',
-                    name: 'language',
-                  }}
+
+                    name='language'
                 />
               }
             />
@@ -159,10 +149,8 @@ export default class SettingsPage extends React.Component {
               leftIcon={
                 <Icon
                   containerStyle={{ backgroundColor: '#A4C8F0' }}
-                  icon={{
-                    type: 'ionicon',
-                    name: 'md-information-circle',
-                  }}
+
+                    name='md-information-circle'
                 />
               }
             />
@@ -173,10 +161,8 @@ export default class SettingsPage extends React.Component {
               leftIcon={
                 <Icon
                   containerStyle={{ backgroundColor: '#C6C7C6' }}
-                  icon={{
-                    type: 'entypo',
-                    name: 'light-bulb',
-                  }}
+
+                    name='light-bulb'
                 />
               }
             />
@@ -189,10 +175,9 @@ export default class SettingsPage extends React.Component {
                   containerStyle={{
                     backgroundColor: '#FECE44',
                   }}
-                  icon={{
-                    type: 'entypo',
-                    name: 'star',
-                  }}
+
+                    name='star'
+
                 />
               }
             />
@@ -205,10 +190,7 @@ export default class SettingsPage extends React.Component {
                   containerStyle={{
                     backgroundColor: '#00C001',
                   }}
-                  icon={{
-                    type: 'materialicon',
-                    name: 'feedback',
-                  }}
+                    name='feedback'
                 />
               }
             />

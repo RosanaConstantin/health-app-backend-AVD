@@ -1,5 +1,4 @@
 import React from 'react';
-import Ionicons from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
@@ -69,7 +68,7 @@ export default class IntroPage extends React.Component {
     return (
         <View style={styles.buttonCircle}>
           <Icon
-            name="arrow-circle-right"
+            name="arrow-right"
             color="rgba(255, 255, 255, .9)"
             size={24}
             style={{ backgroundColor: 'transparent' }}
