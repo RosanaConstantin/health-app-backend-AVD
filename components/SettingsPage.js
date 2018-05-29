@@ -44,7 +44,7 @@ export default class SettingsPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-           pushNotifications: true
+           pushNotifications: global.user.notifications
         }
     }
 
@@ -83,6 +83,30 @@ export default class SettingsPage extends React.Component {
           .done();
   }
 
+    destoyUser = () => {
+        fetch(global.ip + 'api-user-delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                'X-Parse-Session-Token': global.sessionToken
+            }
+
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.error) {
+                    alert(response.error + ' Error while deleting the user !');
+                } else {
+                    alert('Successfully deleted the user');
+                    Actions.home();
+                }
+            })
+            .catch((error) => {
+                alert(error);
+            })
+            .done();
+    }
 
   changeProfile = () =>{
       Actions.change();
@@ -223,6 +247,18 @@ export default class SettingsPage extends React.Component {
                 />
               }
             />
+              <ListItem
+                  title="Destroy your user"
+                  rightTitle={'User'}
+                  onPress={() => this.destoyUser()}
+                  containerStyle={styles.listItemContainer}
+                  leftIcon={
+                      <Icon
+                          containerStyle={{ backgroundColor: '#57DCE7' }}
+                          name='md-settings'
+                      />
+                  }
+              />
           </List>
           <InfoText text="More" />
           <List containerStyle={styles.listContainer}>

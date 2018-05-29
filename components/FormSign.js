@@ -118,7 +118,7 @@ export default class FormInsideSign extends React.Component {
                                 email: userProfile.email,
                                 language: userProfile.profile.language || ' English',
                                 location: userProfile.profile.city || 'Londra',
-                                notifications: userProfile.profile.notifications || true
+                                notifications: userProfile.profile.notifications
                               }; 
                               Actions.dashboard();
                             }
