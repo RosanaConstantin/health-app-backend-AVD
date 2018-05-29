@@ -274,7 +274,7 @@ export default class Change extends React.Component {
         return (
             <DatePicker
                 style={{width: 280}}
-                date={this.state.date}
+                date={global.user.birthdate}
                 mode="date"
                 maxDate="1999-01-01"
                 format="YYYY-MM-DD"
