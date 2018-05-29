@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {Card} from 'react-native-elements'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {
     Image,
     ImageBackground,
@@ -166,12 +168,11 @@ export default class Change extends React.Component {
         this.setState({language: value});
     }
 
-
     renderLocation = () => {
         return (
             <View>
-                <Icon
-                    name="ios-search"
+                <EvilIcons
+                    name="location"
                     size={20}
                     color="#000" />
             <TextInput
@@ -189,8 +190,8 @@ export default class Change extends React.Component {
     renderFirstName = () => {
         return (
             <View>
-                <Icon
-                    name="ios-search"
+                <MaterialCommunityIcons
+                    name="rename-box"
                     size={20}
                     color="#000" />
                 <TextInput
@@ -205,8 +206,8 @@ export default class Change extends React.Component {
     renderLastName = () => {
         return (
             <View>
-                <Icon
-                    name="ios-search"
+                <MaterialCommunityIcons
+                    name="rename-box"
                     size={20}
                     color="#000" />
                 <TextInput
@@ -221,8 +222,8 @@ export default class Change extends React.Component {
     renderTel = () => {
         return (
             <View>
-                <Icon
-                    name="ios-search"
+                <MaterialCommunityIcons
+                    name="phone"
                     size={20}
                     color="#000" />
                 <TextInput
@@ -256,8 +257,8 @@ export default class Change extends React.Component {
     renderLanguage = () => {
         return (
             <View>
-                <Icon
-                    name="ios-search"
+                <MaterialIcons
+                    name="language"
                     size={20}
                     color="#000" />
                 <TextInput
@@ -344,7 +345,7 @@ export default class Change extends React.Component {
                         {this.renderLanguage()}
                     </Card>
 
-                    <TouchableHighlight onPress={this.handleChanges}>
+                    <TouchableHighlight  overlay="transparent" onPress={this.handleChanges}>
                         <Text style={[styles.button, styles.greenButton]}>Save changes</Text>
                     </TouchableHighlight>
                 </View>

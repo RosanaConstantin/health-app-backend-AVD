@@ -39,6 +39,7 @@ export default class Rate extends React.Component {
           <StarRatingForm style = {{marginBottom:10, marginBottom:20}}/> 
           <TouchableHighlight
               style={styles.homeButton}
+              overlay="transparent"
                 onPress={() => {Actions.dashboard();this.setModalVisible(!this.state.modalVisible); }}>
                 <Text style={styles.homeButtonText}>Back to Home</Text>
               </TouchableHighlight>

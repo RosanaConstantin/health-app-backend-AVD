@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types'
 
 
@@ -58,8 +59,8 @@ const Tel = ({
         <TouchableOpacity onPress={() => onPressTel(number)}>
             <View style={[styles.container]}>
                 <View style={styles.iconRow}>
-                        <Icon
-                            name="call"
+                        <Feather
+                            name="phone-call"
                             underlayColor="transparent"
                             iconStyle={styles.telIcon}
                             onPress={() => onPressTel(number)}
@@ -71,7 +72,7 @@ const Tel = ({
                     </View>
                 </View>
                 <View style={styles.smsRow}>
-                    <Icon
+                    <MaterialIcons
                         name="textsms"
                         underlayColor="transparent"
                         iconStyle={styles.smsIcon}

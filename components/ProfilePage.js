@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Card } from 'react-native-elements'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+
 import {
   Image,
   ImageBackground,
@@ -15,7 +16,6 @@ import {
 import Email from './Email'
 import Tel from './Tel'
 import images from './images'
-import { Dropdown } from 'react-native-material-dropdown';
 import DatePicker from 'react-native-datepicker'
 
 const styles = StyleSheet.create({
@@ -123,8 +123,8 @@ export default class ProfilePage extends React.Component {
             <Text style={styles.userNameText}>{global.user.firstName + ' ' + global.user.lastName}</Text>
             <View style={styles.userAddressRow}>
               <View>
-                <Icon
-                  name="place"
+                <EvilIcons
+                  name="location"
                   underlayColor="transparent"
                   iconStyle={styles.placeIcon}
                 />

@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types'
 
 
@@ -46,7 +46,7 @@ const Email = ({ onPressEmail, email }) => (
   <TouchableOpacity onPress={() => onPressEmail(email)}>
     <View style={[styles.container]}>
       <View style={styles.iconRow}>
-          <Icon
+          <MaterialIcons
             name="email"
             underlayColor="transparent"
             iconStyle={styles.emailIcon}

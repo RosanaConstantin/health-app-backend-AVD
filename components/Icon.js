@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types'
 
 const styles = StyleSheet.create({
@@ -25,7 +25,7 @@ const BaseIcon = ({ containerStyle, icon }) => (
       size={24}
       color="white"
       type="material"
-      name="notifications"
+      name="md-notifications"
       {...icon}
     />
   </View>

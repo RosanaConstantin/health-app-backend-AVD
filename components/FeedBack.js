@@ -40,6 +40,7 @@ export default class FeedBack extends React.Component {
                     value={this.state.text}
                 />
                 <TouchableHighlight
+                    overlay="transparent"
                     style={styles.homeButton}
                     onPress={() => { Actions.dashboard(); this.setModalVisible(!this.state.modalVisible); }}>
                     <Text style={styles.homeButtonText}>Send feedback</Text>

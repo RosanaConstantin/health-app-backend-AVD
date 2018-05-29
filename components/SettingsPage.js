@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, StyleSheet, Text, View, Picker } from 'react-native'
 import { Avatar, List, ListItem } from 'react-native-elements'
-import PropTypes from 'prop-types'
-import Lang from './Lang'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icon from './Icon'
 import InfoText from './InfoText'
 import { Actions } from 'react-native-router-flux';
@@ -19,6 +18,8 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 6,
+      flex: 1,
+      justifyContent: 'space-between',
   },
   userImage: {
     marginRight: 12,
@@ -31,6 +32,10 @@ const styles = StyleSheet.create({
   listItemContainer: {
     borderBottomColor: '#ECECEC',
   },
+    logOut: {
+    color: 'gray',
+        fontSize: 16
+    }
 })
 
 
@@ -44,8 +49,37 @@ export default class SettingsPage extends React.Component {
     this.setState(state => ({
       pushNotifications: !state.pushNotifications,
     }))
-
+      fetch(global.ip + 'api-user-update-profile', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+              'X-Parse-Session-Token': global.sessionToken
+          },
+          body:JSON.stringify({
+              profile: {
+                  notifications: !state.pushNotifications
+              }
+          })
+      })
+          .then((response) => response.json())
+          .then((response) => {
+              if (response.error) {
+                  alert(response.error + ' Error while gettig user profile!');
+              } else {
+                  if(state.pushNotifications){
+                      alert('Successfully subscribed on notifications');
+                  } else {
+                      alert('Successfully unsubscribed on notifications');
+                  }
+              }
+          })
+          .catch((error) => {
+              alert(error);
+          })
+          .done();
   }
+
 
   changeProfile = () =>{
       Actions.change();
@@ -59,8 +93,35 @@ export default class SettingsPage extends React.Component {
       alert('Change your location from profile field!');
     }
 
+    logOut = () => {
+        fetch(global.ip + 'logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                'X-Parse-Session-Token': global.sessionToken
+            }
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if(response.result === 500){
+                    alert('Something went bad while logging out');
+                } else{
+                    alert('Successfully logged out')
+                    Actions.home();
+                }
+            })
+            .catch((error) => {
+                alert(error);
+            })
+            .done()
+    }
 
-    render() {
+    changeUserCredentials = () => {
+        Actions.credentialsChange();
+    }
+
+    render(){
       return (
         <ScrollView style={styles.scroll}>
           <View style={styles.userRow}>
@@ -82,10 +143,17 @@ export default class SettingsPage extends React.Component {
                 {global.user.email}
               </Text>
             </View>
+              <View>
+                  <Text style={styles.logOut}>Log out</Text>
+                  <MaterialCommunityIcons
+                    name="logout-variant"
+                    onPress={() => this.logOut()}
+                  />
+              </View>
           </View>
           <InfoText text="Account" />
             <ListItem
-                title="Profile"
+                title="Change your profile"
                 rightTitle={'Profile'}
                 onPress={() => this.changeProfile()}
                 containerStyle={styles.listItemContainer}
@@ -96,6 +164,19 @@ export default class SettingsPage extends React.Component {
                     />
                 }
             />
+            <ListItem
+                title="Change your user credentials"
+                rightTitle={'Profile'}
+                onPress={() => this.changeUserCredentials()}
+                containerStyle={styles.listItemContainer}
+                leftIcon={
+                    <Icon
+                        containerStyle={{ backgroundColor: '#57DCE7' }}
+                        name='md-settings'
+                    />
+                }
+            />
+
           <List containerStyle={styles.listContainer}>
             <ListItem
               switchButton
@@ -109,7 +190,7 @@ export default class SettingsPage extends React.Component {
                   containerStyle={{
                     backgroundColor: '#FFADF2',
                   }}
-                    name='notifications'
+                    name='md-notifications'
                 />
               }
             />
@@ -122,7 +203,7 @@ export default class SettingsPage extends React.Component {
                 <Icon
                   containerStyle={{ backgroundColor: '#57DCE7' }}
 
-                    name='place'
+                    name='md-locate'
                 />
               }
             />

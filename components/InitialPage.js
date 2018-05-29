@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image, Button, Alert } from 'react-native';
 // import { Constants } from 'expo';
 import {Actions} from 'react-native-router-flux';
-
+import * as Animatable from 'react-native-animatable';
 
   
   // The stylesheet is here, and then below it I have:
@@ -10,10 +10,10 @@ import {Actions} from 'react-native-router-flux';
     render() {
         return (
             <View style={styles.container}>
-      
-              <Text style={styles.title}>
+
+                <Animatable.Text animation="pulse" easing="ease-out" iterationCount="infinite" style={styles.title}>
                 HealthApp
-              </Text>
+              </Animatable.Text>
       
               <Text style={styles.paragraph}>
                 Keep in touch with your health

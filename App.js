@@ -13,6 +13,8 @@ import TermsPolicies from './components/TermsPolicies'
 import Rate from './components/Rate'
 import FeedBack from './components/FeedBack'
 import Change from './components/Change'
+import ChangeUserCredentials from './components/ChangeUserCredentials'
+import SettingsPage from './components/SettingsPage'
 
 import environment from "./environment";
 
@@ -43,6 +45,8 @@ function applicationInitialize() {
             <Scene key="terms" component={TermsPolicies}/>
             <Scene key="feedback" component={FeedBack}/>
             <Scene key="change" component={Change}/>
+            <Scene key="credentialsChange" component={ChangeUserCredentials}/>
+            <Scene key="settings" component={SettingsPage}/>
 
             </Scene>
             </Router>

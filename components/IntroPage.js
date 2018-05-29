@@ -1,5 +1,6 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import EvilIcons from 'react-native-vector-icons/EvilIcons'
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import {Actions} from 'react-native-router-flux';
@@ -67,7 +68,7 @@ export default class IntroPage extends React.Component {
   _renderNextButton = () => {
     return (
         <View style={styles.buttonCircle}>
-          <Icon
+          <EvilIcons
             name="arrow-right"
             color="rgba(255, 255, 255, .9)"
             size={24}
@@ -79,8 +80,8 @@ export default class IntroPage extends React.Component {
   _renderDoneButton = () => {
     return (
       <View style={styles.buttonCircle}>
-        <Icon
-          name="check"
+        <Ionicons
+          name="md-done-all"
           color="rgba(255, 255, 255, .9)"
           size={24}
           style={{ backgroundColor: 'transparent' }}
@@ -92,7 +93,7 @@ export default class IntroPage extends React.Component {
   _renderSkipButton = () => {
     return (
       <View style={styles.buttonCircleExit}>
-        <Icon
+        <Ionicons
           name="md-exit"
           color="rgba(255, 255, 255, .9)"
           size={24}

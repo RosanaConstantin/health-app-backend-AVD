@@ -39,6 +39,7 @@ export default class TermsPolicies extends React.Component {
 This Terms of Use Agreement (this “Agreement”) is entered into by and between iMedicalApps LLC (the “Author”) and “you,” the user of this web blog, also known as the “iMedicalApps (the “Site”). Access to, use of and/or browsing of the Site is provided subject to the terms and conditions set forth herein. By accessing, using and/or browsing the Site, you hereby agree to these terms and conditions.
           </Text>
           <TouchableHighlight
+              overlay="transparent"
                   style={styles.homeButton}
                     onPress={() => {Actions.dashboard();this.setModalVisible(!this.state.modalVisible); }}>
                     <Text style={styles.homeButtonText}>Back to Home</Text>

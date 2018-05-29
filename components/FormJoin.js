@@ -141,7 +141,7 @@ export default class FormInsideJoin extends React.Component {
                     onChange={this._onChange}
                    
                 />
-                <TouchableHighlight onPress={this._handleAdd}>
+                <TouchableHighlight underlayColor="transparent" onPress={this._handleAdd}>
                     <Text style={[styles.button, styles.greenButton]}>Join us</Text>
                 </TouchableHighlight>
                 

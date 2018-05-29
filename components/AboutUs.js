@@ -44,6 +44,7 @@ export default class AboutUs extends React.Component {
       </Text>
       <TouchableHighlight
               style={styles.homeButton}
+              overlay="transparent"
                 onPress={() => {Actions.dashboard();this.setModalVisible(!this.state.modalVisible); }}>
                 <Text style={styles.homeButtonText}>Back to Home</Text>
               </TouchableHighlight>
