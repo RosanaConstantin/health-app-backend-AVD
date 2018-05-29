@@ -41,13 +41,16 @@ const styles = StyleSheet.create({
 
 export default class SettingsPage extends React.Component {
 
-  state = {
-    pushNotifications: global.user.notifications
-  }
+    constructor(props) {
+        super(props)
+        this.state = {
+           pushNotifications: true
+        }
+    }
 
   onChangePushNotifications = () => {
     this.setState(state => ({
-      pushNotifications: !state.pushNotifications,
+      pushNotifications: !this.state.pushNotifications,
     }))
       fetch(global.ip + 'api-user-update-profile', {
           method: 'POST',
@@ -58,7 +61,7 @@ export default class SettingsPage extends React.Component {
           },
           body:JSON.stringify({
               profile: {
-                  notifications: !state.pushNotifications
+                  notifications: !this.state.pushNotifications
               }
           })
       })
@@ -67,7 +70,7 @@ export default class SettingsPage extends React.Component {
               if (response.error) {
                   alert(response.error + ' Error while gettig user profile!');
               } else {
-                  if(state.pushNotifications){
+                  if(this.state.pushNotifications){
                       alert('Successfully subscribed on notifications');
                   } else {
                       alert('Successfully unsubscribed on notifications');
