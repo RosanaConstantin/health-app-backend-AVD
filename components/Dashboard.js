@@ -26,7 +26,7 @@ export default class Dashboard extends React.Component {
       <View style={styles.container}>
         {this.state.page === "ProfileScreen" && <ProfilePage/>}
         {this.state.page === "NotificationScreen" && <NotificationPage/>}
-        {this.state.page === "HomePage" && <HomePage/>}
+        {this.state.page === "HomeScreen" && <HomePage/>}
         {this.state.page === "ActivityScreen" && <ActivityPage/>}
         {this.state.page === "SettingsScreen" && <SettingsPage/>}
 

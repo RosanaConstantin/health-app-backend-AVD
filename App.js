@@ -14,14 +14,17 @@ import Rate from './components/Rate'
 import FeedBack from './components/FeedBack'
 import Change from './components/Change'
 import ChangeUserCredentials from './components/ChangeUserCredentials'
+import SleepPage from './components/SleepPage'
+import StepsPage from './components/StepsPage'
+import HeartRatePage from './components/HeartRatePage'
+import FallPage from './components/FallPage'
+import TemperaturePage from './components/TemperaturePage'
 import SettingsPage from './components/SettingsPage'
 
 import environment from "./environment";
 
 function applicationInitialize() {
     class AppComponent extends React.Component {
-
-
         constructor() {
             super();
             global.ip = environment.serverUrl + 'functions/';
@@ -29,7 +32,7 @@ function applicationInitialize() {
 
         componentDidMount() {
             Keyboard.dismiss();
-            Actions.intro();
+            Actions.dashboard();
         }
 
         render() {
@@ -47,6 +50,11 @@ function applicationInitialize() {
             <Scene key="change" component={Change}/>
             <Scene key="credentialsChange" component={ChangeUserCredentials}/>
             <Scene key="settings" component={SettingsPage}/>
+            <Scene key="sleep" component={SleepPage}/>
+            <Scene key="steps" component={StepsPage}/>
+            <Scene key="heartRate" component={HeartRatePage}/>
+            <Scene key="fall" component={FallPage}/>
+            <Scene key="temperature" component={TemperaturePage}/>
 
             </Scene>
             </Router>
