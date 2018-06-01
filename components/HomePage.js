@@ -122,7 +122,7 @@ export default class HomePage extends React.Component {
                 </View>
                 <View style={styles.button}>
                     <TouchableHighlight
-                        onPress ={this.getLocation()}
+                        onPress ={this.getLocation}
                         underlayColor='#042417'
 
                     >
@@ -140,7 +140,7 @@ export default class HomePage extends React.Component {
 
                 <View style={styles.button}>
                     <TouchableHighlight
-                        onPress ={this.getTemperature()}
+                        onPress ={this.getTemperature}
                         underlayColor='#042417'
 
                     >
@@ -156,7 +156,7 @@ export default class HomePage extends React.Component {
 
                 <View style={styles.button}>
                     <TouchableHighlight
-                        onPress ={this.getFall()}
+                        onPress ={this.getFall}
                         underlayColor='#042417'
 
                     >
