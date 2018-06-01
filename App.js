@@ -20,7 +20,7 @@ import HeartRatePage from './components/HeartRatePage'
 import FallPage from './components/FallPage'
 import TemperaturePage from './components/TemperaturePage'
 import SettingsPage from './components/SettingsPage'
-
+import LocationPage from './components/LocationPage'
 import environment from "./environment";
 
 function applicationInitialize() {
@@ -55,6 +55,7 @@ function applicationInitialize() {
             <Scene key="heartRate" component={HeartRatePage}/>
             <Scene key="fall" component={FallPage}/>
             <Scene key="temperature" component={TemperaturePage}/>
+            <Scene key="location" component={LocationPage}/>
 
             </Scene>
             </Router>

@@ -58,11 +58,12 @@ const styles = StyleSheet.create({
 
 export default class HomePage extends React.Component {
 
-    getSteps = () =>{ Actions.steps()}
-    getSleep = () =>{ Actions.sleep()}
-    getTemperature = () =>{ Actions.temperature()}
-    getHeartRate = () =>{ Actions.heartRate()}
-    getFall = () =>{ Actions.fall()}
+    getSteps = () => { Actions.steps()}
+    getSleep = () => { Actions.sleep()}
+    getTemperature = () => { Actions.temperature()}
+    getHeartRate = () => { Actions.heartRate()}
+    getFall = () => {Actions.fall()}
+    getLocation = () => {Actions.location()}
 
     render() {
       return (
@@ -104,12 +105,11 @@ export default class HomePage extends React.Component {
                     </TouchableHighlight>
                 </View>
             </View>
-            <View style={styles.secondRow}>
+            <View style={styles.firstRow}>
                 <View style={styles.button}>
                     <TouchableHighlight
                         onPress ={this.getHeartRate}
                         underlayColor='#042417'
-
                     >
                         <View  style={styles.wrap}>
                             <Image
@@ -120,12 +120,27 @@ export default class HomePage extends React.Component {
                         </View>
                     </TouchableHighlight>
                 </View>
+                <View style={styles.button}>
+                    <TouchableHighlight
+                        onPress ={this.getLocation()}
+                        underlayColor='#042417'
+
+                    >
+                        <View  style={styles.wrap}>
+                            <Image
+                                style={styles.image}
+                                source={require('../assets/location.png')}
+                            />
+                            <Text style={styles.buttonText}> Location </Text>
+                        </View>
+                    </TouchableHighlight>
+                </View>
             </View>
             <View style={styles.firstRow}>
 
                 <View style={styles.button}>
                     <TouchableHighlight
-                        onPress ={this.getSteps}
+                        onPress ={this.getTemperature()}
                         underlayColor='#042417'
 
                     >
@@ -141,7 +156,7 @@ export default class HomePage extends React.Component {
 
                 <View style={styles.button}>
                     <TouchableHighlight
-                        onPress ={this.getHeartRate}
+                        onPress ={this.getFall()}
                         underlayColor='#042417'
 
                     >
