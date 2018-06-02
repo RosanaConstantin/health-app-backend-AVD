@@ -347,9 +347,6 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		0D824D87AB44497BA0373FE3 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		63F39FECB1344146A35C8459 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		1AAF3996A19A43E083053BE6 /* ReactNativeBluetooth.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeBluetooth.xcodeproj"; path = "../node_modules/react-native-bluetooth-manager/ios/ReactNativeBluetooth.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		23BEF58A496349A3950A9AEC /* CoreBluetoothSwift.framework */ = {isa = PBXFileReference; name = "CoreBluetoothSwift.framework"; path = "System/Library/Frameworks/CoreBluetoothSwift.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		8014CFF9BBBB428B9550B695 /* libReactNativeBluetooth.a */ = {isa = PBXFileReference; name = "libReactNativeBluetooth.a"; path = "libReactNativeBluetooth.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1202,7 +1199,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-bluetooth-manager\ios/**",
 				);
 			};
 			name = Debug;
@@ -1230,7 +1226,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-bluetooth-manager\ios/**",
 				);
 			};
 			name = Release;
@@ -1253,7 +1248,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-bluetooth-manager\ios/**",
 				);
 			};
 			name = Debug;
@@ -1275,7 +1269,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-bluetooth-manager\ios/**",
 				);
 			};
 			name = Release;
@@ -1312,7 +1305,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-bluetooth-manager\ios/**",
 				);
 			};
 			name = Debug;
@@ -1349,7 +1341,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-bluetooth-manager\ios/**",
 				);
 			};
 			name = Release;
@@ -1385,7 +1376,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-bluetooth-manager\ios/**",
 				);
 			};
 			name = Debug;
@@ -1421,7 +1411,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-bluetooth-manager\ios/**",
 				);
 			};
 			name = Release;

@@ -22,6 +22,7 @@ export default class LocationPage extends React.Component {
             <MapView
                 renderMarker={renderMarker}
                 initialRegion={{
+                    latitude: 44.3503,
                     longitude:26.096306,
                     latitudeDelta: 9.22,
                     longitudeDelta: 4.21,
