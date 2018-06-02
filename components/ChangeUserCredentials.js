@@ -152,7 +152,7 @@ export default class ChangeUserCredentials extends React.Component {
             <View>
                 <EvilIcons
                     name="user"
-                    size={20}
+                    size={30}
                     color="#000" />
                 <TextInput
                     onChangeText={(value) => {this.onPressEmail(value)}}
@@ -168,7 +168,7 @@ export default class ChangeUserCredentials extends React.Component {
             <View>
                 <EvilIcons
                     name="user"
-                    size={20}
+                    size={30}
                     color="#000" />
                 <TextInput
                     onChangeText={(value) => {this.onPressPassword(value)}}
@@ -184,7 +184,7 @@ export default class ChangeUserCredentials extends React.Component {
             <View>
                 <EvilIcons
                     name="user"
-                    size={20}
+                    size={30}
                     color="#000" />
                 <TextInput
                     onChangeText={(value) => {this.onPressUsername(value)}}

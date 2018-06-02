@@ -61,6 +61,7 @@ const Tel = ({
                 <View style={styles.iconRow}>
                         <Feather
                             name="phone-call"
+                            size={30}
                             underlayColor="transparent"
                             iconStyle={styles.telIcon}
                             onPress={() => onPressTel(number)}
@@ -74,6 +75,7 @@ const Tel = ({
                 <View style={styles.smsRow}>
                     <MaterialIcons
                         name="textsms"
+                        size={30}
                         underlayColor="transparent"
                         iconStyle={styles.smsIcon}
                     />

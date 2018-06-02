@@ -116,7 +116,7 @@ export default class FormInsideJoin extends React.Component {
                      if(response.error){
                          alert(response.error + ' Try again to join in!');
                      } else {
-                        alert('Your account has been created! Just sign in now!');
+                        alert('Your account has been created! Sign in and go to Settings to complete your profile!');
                         Actions.home();
                      }
                 })

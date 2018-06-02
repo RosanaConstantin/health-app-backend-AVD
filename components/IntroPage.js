@@ -71,7 +71,7 @@ export default class IntroPage extends React.Component {
           <EvilIcons
             name="arrow-right"
             color="rgba(255, 255, 255, .9)"
-            size={24}
+            size={30}
             style={{ backgroundColor: 'transparent' }}
           />
         </View>     
@@ -83,7 +83,7 @@ export default class IntroPage extends React.Component {
         <Ionicons
           name="md-done-all"
           color="rgba(255, 255, 255, .9)"
-          size={24}
+          size={30}
           style={{ backgroundColor: 'transparent' }}
           onPress={() => Actions.home()}
         />
@@ -96,7 +96,7 @@ export default class IntroPage extends React.Component {
         <Ionicons
           name="md-exit"
           color="rgba(255, 255, 255, .9)"
-          size={24}
+          size={30}
           style={{ backgroundColor: 'transparent' }}
           onPress={() => Actions.home()}
         />

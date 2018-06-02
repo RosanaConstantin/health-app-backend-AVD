@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, StyleSheet, Text, View, Picker } from 'react-native'
 import { Avatar, List, ListItem } from 'react-native-elements'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Entypo from 'react-native-vector-icons/Entypo'
 import Icon from './Icon'
 import InfoText from './InfoText'
 import { Actions } from 'react-native-router-flux';
@@ -9,16 +9,17 @@ import { Actions } from 'react-native-router-flux';
 const styles = StyleSheet.create({
   scroll: {
     backgroundColor: 'white',
-      paddingTop: 50
+      marginBottom:130
   },
   userRow: {
     alignItems: 'center',
     flexDirection: 'row',
-    paddingBottom: 6,
     paddingLeft: 15,
     paddingRight: 15,
+      width:'100%',
+      height:'12%',
     paddingTop: 6,
-      flex: 1,
+      // flex: 1,
       justifyContent: 'space-between',
   },
   userImage: {
@@ -49,10 +50,8 @@ export default class SettingsPage extends React.Component {
     }
 
   onChangePushNotifications = () => {
-    this.setState(state => ({
-      pushNotifications: !this.state.pushNotifications,
-    }))
-      fetch(global.ip + 'api-user-update-profile', {
+    this.setState({pushNotifications: !this.state.pushNotifications});
+      fetch(global.ip + 'api-user-update-notifications', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -60,9 +59,7 @@ export default class SettingsPage extends React.Component {
               'X-Parse-Session-Token': global.sessionToken
           },
           body:JSON.stringify({
-              profile: {
-                  notifications: !this.state.pushNotifications
-              }
+              notifications: !this.state.pushNotifications
           })
       })
           .then((response) => response.json())
@@ -150,7 +147,7 @@ export default class SettingsPage extends React.Component {
 
     render(){
       return (
-        <ScrollView style={styles.scroll}>
+        <View>
           <View style={styles.userRow}>
             <View style={styles.userImage}>
               <Avatar
@@ -172,15 +169,17 @@ export default class SettingsPage extends React.Component {
             </View>
               <View>
                   <Text style={styles.logOut}>Log out</Text>
-                  <MaterialCommunityIcons
-                    name="logout-variant"
+                  <Entypo
+                      size={30}
+                     name="log-out"
                     onPress={() => this.logOut()}
                   />
               </View>
           </View>
+          <ScrollView style={styles.scroll}>
           <InfoText text="Account" />
             <ListItem
-                title="Change your profile"
+                title="Profile settings"
                 rightTitle={'Profile'}
                 onPress={() => this.changeProfile()}
                 containerStyle={styles.listItemContainer}
@@ -188,18 +187,20 @@ export default class SettingsPage extends React.Component {
                     <Icon
                         containerStyle={{ backgroundColor: '#57DCE7' }}
                         name='md-person'
+                        ionicons={true}
                     />
                 }
             />
             <ListItem
-                title="Change your user credentials"
+                title="Credentials settings"
                 rightTitle={'Profile'}
                 onPress={() => this.changeUserCredentials()}
                 containerStyle={styles.listItemContainer}
                 leftIcon={
                     <Icon
                         containerStyle={{ backgroundColor: '#57DCE7' }}
-                        name='md-settings'
+                        name='account-settings-variant'
+                        materialsC={true}
                     />
                 }
             />
@@ -208,7 +209,7 @@ export default class SettingsPage extends React.Component {
             <ListItem
               switchButton
               hideChevron
-              title="Push Notifications"
+              title="Push notifications"
               switched={this.state.pushNotifications}
               onSwitch={this.onChangePushNotifications}
               containerStyle={styles.listItemContainer}
@@ -217,6 +218,7 @@ export default class SettingsPage extends React.Component {
                   containerStyle={{
                     backgroundColor: '#FFADF2',
                   }}
+                  ionicons={true}
                     name='md-notifications'
                 />
               }
@@ -229,8 +231,8 @@ export default class SettingsPage extends React.Component {
               leftIcon={
                 <Icon
                   containerStyle={{ backgroundColor: '#57DCE7' }}
-
-                    name='md-locate'
+                    entypo={true}
+                    name='location'
                 />
               }
             />
@@ -242,7 +244,7 @@ export default class SettingsPage extends React.Component {
               leftIcon={
                 <Icon
                   containerStyle={{ backgroundColor: '#FEA8A1' }}
-
+                    materialI={true}
                     name='language'
                 />
               }
@@ -255,7 +257,8 @@ export default class SettingsPage extends React.Component {
                   leftIcon={
                       <Icon
                           containerStyle={{ backgroundColor: '#57DCE7' }}
-                          name='md-settings'
+                          entypo={true}
+                          name='remove-user'
                       />
                   }
               />
@@ -263,14 +266,14 @@ export default class SettingsPage extends React.Component {
           <InfoText text="More" />
           <List containerStyle={styles.listContainer}>
             <ListItem
-              title="About US"
+              title="About us"
               onPress={() => Actions.about()}
               containerStyle={styles.listItemContainer}
               leftIcon={
                 <Icon
                   containerStyle={{ backgroundColor: '#A4C8F0' }}
-
-                    name='md-information-circle'
+                    entypo={true}
+                  name={"info"}
                 />
               }
             />
@@ -281,13 +284,13 @@ export default class SettingsPage extends React.Component {
               leftIcon={
                 <Icon
                   containerStyle={{ backgroundColor: '#C6C7C6' }}
-
+                    entypo={true}
                     name='light-bulb'
                 />
               }
             />
             <ListItem
-              title="Rate Us"
+              title="Rate us"
               onPress={() => Actions.rate()}
               containerStyle={styles.listItemContainer}
               leftIcon={
@@ -295,14 +298,14 @@ export default class SettingsPage extends React.Component {
                   containerStyle={{
                     backgroundColor: '#FECE44',
                   }}
-
+                  entypo={true}
                     name='star'
 
                 />
               }
             />
             <ListItem
-              title="Send FeedBack"
+              title="Send feedback"
               onPress={() => Actions.feedback()}
               containerStyle={styles.listItemContainer}
               leftIcon={
@@ -311,11 +314,13 @@ export default class SettingsPage extends React.Component {
                     backgroundColor: '#00C001',
                   }}
                     name='feedback'
+                  materialI={true}
                 />
               }
             />
           </List>
         </ScrollView>
+        </View>
       )
     }
   }

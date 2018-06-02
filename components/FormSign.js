@@ -114,7 +114,7 @@ export default class FormInsideSign extends React.Component {
                                 gender: userProfile.profile.gender || "not updated",
                                 birthdate: userProfile.profile.birthdate && userProfile.profile.birthdate.iso.split('T')[0] || "YYYY-MM-DD",
                                   phone: userProfile.profile.phoneNumber || 'not updated',
-                                avatar: userProfile.profile.photo? images[userProfile.profile.firstName] : images['noImage'],
+                                avatar: images[userProfile.profile.firstName] ? images[userProfile.profile.firstName] : images['noImage'],
                                 email: userProfile.email,
                                 language: userProfile.profile.language || ' English',
                                 location: userProfile.profile.city || 'Londra',

@@ -173,7 +173,7 @@ export default class Change extends React.Component {
             <View>
                 <EvilIcons
                     name="location"
-                    size={20}
+                    size={30}
                     color="#000" />
             <TextInput
                        placeholder={global.user.location}
@@ -192,7 +192,7 @@ export default class Change extends React.Component {
             <View>
                 <MaterialCommunityIcons
                     name="rename-box"
-                    size={20}
+                    size={30}
                     color="#000" />
                 <TextInput
                     onChangeText={(value) => {this.onPressFirst(value)}}
@@ -208,7 +208,7 @@ export default class Change extends React.Component {
             <View>
                 <MaterialCommunityIcons
                     name="rename-box"
-                    size={20}
+                    size={30}
                     color="#000" />
                 <TextInput
                     onChangeText={(value) => {this.onPressLast(value)}}
@@ -224,7 +224,7 @@ export default class Change extends React.Component {
             <View>
                 <MaterialCommunityIcons
                     name="phone"
-                    size={20}
+                    size={30}
                     color="#000" />
                 <TextInput
                     placeholder={global.user.phone}
@@ -259,7 +259,7 @@ export default class Change extends React.Component {
             <View>
                 <MaterialIcons
                     name="language"
-                    size={20}
+                    size={30}
                     color="#000" />
                 <TextInput
                     onChangeText={(value) => {this.onPressLanguage(value)}}

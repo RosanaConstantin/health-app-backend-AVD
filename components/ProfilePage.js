@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
   },
   placeIcon: {
     color: 'white',
-    fontSize: 26,
   },
   scroll: {
     backgroundColor: '#FFF',
@@ -126,6 +125,7 @@ export default class ProfilePage extends React.Component {
                 <EvilIcons
                   name="location"
                   underlayColor="transparent"
+                  size={30}
                   iconStyle={styles.placeIcon}
                 />
               </View>
