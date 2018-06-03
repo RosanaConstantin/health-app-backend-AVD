@@ -22,6 +22,7 @@ import TemperaturePage from './components/TemperaturePage'
 import SettingsPage from './components/SettingsPage'
 import LocationPage from './components/LocationPage'
 import environment from "./environment";
+import BluetoothScanner from './components/BluetoothScanner'
 
 function applicationInitialize() {
     class AppComponent extends React.Component {
@@ -32,7 +33,7 @@ function applicationInitialize() {
 
         componentDidMount() {
             Keyboard.dismiss();
-            Actions.intro();
+            Actions.dashboard();
         }
 
         render() {
@@ -56,6 +57,7 @@ function applicationInitialize() {
             <Scene key="fall" component={FallPage}/>
             <Scene key="temperature" component={TemperaturePage}/>
             <Scene key="location" component={LocationPage}/>
+            <Scene key="scanner" component={BluetoothScanner}/>
 
             </Scene>
             </Router>

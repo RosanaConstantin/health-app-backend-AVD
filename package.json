@@ -24,6 +24,7 @@
     "react-native-advanced-forms": "^1.1.6",
     "react-native-animatable": "^1.2.4",
     "react-native-app-intro-slider": "^0.2.4",
+    "react-native-ble-manager": "^6.2.9",
     "react-native-datepicker": "latest",
     "react-native-elements": "^0.19.1",
     "react-native-flex-keyboard-spacer": "^1.0.8",
