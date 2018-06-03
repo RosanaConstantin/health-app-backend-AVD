@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Image, TouchableOpacity, Platform, PermissionsAndroid } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Icon  from 'react-native-vector-icons/Ionicons'
 import {Actions} from 'react-native-router-flux';
 import BluetoothManager from './BluetoothManager'
@@ -71,34 +71,15 @@ export default class HomePage extends React.Component {
     getHeartRate = () => { Actions.heartRate()}
     getFall = () => {Actions.fall()}
     getLocation = () => {Actions.location()}
+
     connectBluetooth = () => {
         BluetoothManager.connect();
     }
 
     connectToWatch = () => {
-       // BluetoothManager.pairing();
-       Actions.scanner();
+        Actions.scanner();
     }
-    // componentDidMount() {
-    //     // inizializzo il modulo bluetooth una volta per tutte
-    //     BluetoothManager.initialize();
-    //     // richiesta permessi localizzazione
-    //     if (Platform.OS === 'android' && Platform.Version >= 23) {
-    //         PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
-    //             if (result) {
-    //                 console.log("Permission is OK");
-    //             } else {
-    //                 PermissionsAndroid.requestPermission(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
-    //                     if (result) {
-    //                         Alert.alert("User accept");
-    //                     } else {
-    //                         Alert.alert("User refuse");
-    //                     }
-    //                 });
-    //             }
-    //         });
-    //     }
-    // }
+
 
     render() {
       return (

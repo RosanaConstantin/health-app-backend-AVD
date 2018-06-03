@@ -1,271 +1,422 @@
-import React, { Component } from 'react';
+
+import React, { Component } from 'react'
 import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    TouchableHighlight,
-    NativeAppEventEmitter,
-    NativeEventEmitter,
-    NativeModules,
     Platform,
-    PermissionsAndroid,
-    ListView,
     ScrollView,
-    AppState,
-    Dimensions,
-} from 'react-native';
-import BleManager from 'react-native-ble-manager';
+    StyleSheet,
+    Switch,
+    Text,
+    TouchableOpacity,
+    TouchableHighlight,
+    View,
+    Modal,
+    ActivityIndicator,
+    Image
+} from 'react-native'
 
-const window = Dimensions.get('window');
-const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+import Toast from '@remobile/react-native-toast'
+import BluetoothSerial from 'react-native-bluetooth-serial'
 
-const BleManagerModule = NativeModules.BleManager;
-const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
+import { Buffer } from 'buffer'
+global.Buffer = Buffer
+const iconv = require('iconv-lite')
 
-export default class App extends Component {
-    constructor(){
-        super()
-
-        this.state = {
-            scanning:false,
-            peripherals: new Map(),
-            appState: ''
-        }
-
-        this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
-        this.handleStopScan = this.handleStopScan.bind(this);
-        this.handleUpdateValueForCharacteristic = this.handleUpdateValueForCharacteristic.bind(this);
-        this.handleDisconnectedPeripheral = this.handleDisconnectedPeripheral.bind(this);
-        this.handleAppStateChange = this.handleAppStateChange.bind(this);
-    }
-
-    componentDidMount() {
-        AppState.addEventListener('change', this.handleAppStateChange);
-
-        BleManager.start({showAlert: false});
-
-        this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
-        this.handlerStop = bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan );
-        this.handlerDisconnect = bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', this.handleDisconnectedPeripheral );
-        this.handlerUpdate = bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', this.handleUpdateValueForCharacteristic );
-
-        if (Platform.OS === 'android' && Platform.Version >= 23) {
-            PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
-                if (result) {
-                    console.log("Permission is OK");
-                } else {
-                    PermissionsAndroid.requestPermission(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
-                        if (result) {
-                            console.log("User accept");
-                        } else {
-                            console.log("User refuse");
-                        }
-                    });
-                }
-            });
-        }
-    }
-
-    handleAppStateChange(nextAppState) {
-        if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
-            console.log('App has come to the foreground!')
-            BleManager.getConnectedPeripherals([]).then((peripheralsArray) => {
-                console.log('Connected peripherals: ' + peripheralsArray.length);
-            });
-        }
-        this.setState({appState: nextAppState});
-    }
-
-    componentWillUnmount() {
-        this.handlerDiscover.remove();
-        this.handlerStop.remove();
-        this.handlerDisconnect.remove();
-        this.handlerUpdate.remove();
-    }
-
-    handleDisconnectedPeripheral(data) {
-        let peripherals = this.state.peripherals;
-        let peripheral = peripherals.get(data.peripheral);
-        if (peripheral) {
-            peripheral.connected = false;
-            peripherals.set(peripheral.id, peripheral);
-            this.setState({peripherals});
-        }
-        console.log('Disconnected from ' + data.peripheral);
-    }
-
-    handleUpdateValueForCharacteristic(data) {
-        console.log('Received data from ' + data.peripheral + ' characteristic ' + data.characteristic, data.value);
-    }
-
-    handleStopScan() {
-        console.log('Scan is stopped');
-        this.setState({ scanning: false });
-    }
-
-    startScan() {
-        if (!this.state.scanning) {
-            this.setState({peripherals: new Map()});
-            BleManager.scan([], 3, true).then((results) => {
-                console.log('Scanning...');
-                this.setState({scanning:true});
-            });
-        }
-    }
-
-    retrieveConnected(){
-        BleManager.getConnectedPeripherals([]).then((results) => {
-            console.log(results);
-            var peripherals = this.state.peripherals;
-            for (var i = 0; i < results.length; i++) {
-                var peripheral = results[i];
-                peripheral.connected = true;
-                peripherals.set(peripheral.id, peripheral);
-                this.setState({ peripherals });
-            }
-        });
-    }
-
-    handleDiscoverPeripheral(peripheral){
-        var peripherals = this.state.peripherals;
-        if (!peripherals.has(peripheral.id)){
-            console.log('Got ble peripheral', peripheral);
-            peripherals.set(peripheral.id, peripheral);
-            this.setState({ peripherals })
-        }
-    }
-
-    bin2String(array) {
-        var result = "";
-        for (var i = 0; i < array.length; i++) {
-            result += String.fromCharCode(parseInt(array[i], 2));
-        }
-        return result;
-    }
-
-    test(peripheral) {
-        if (peripheral){
-            if (peripheral.connected){
-                BleManager.disconnect(peripheral.id);
-            }else{
-                BleManager.connect(peripheral.id).then(() => {
-                    let peripherals = this.state.peripherals;
-                    let p = peripherals.get(peripheral.id);
-                    if (p) {
-                        p.connected = true;
-                        peripherals.set(peripheral.id, p);
-                        this.setState({peripherals});
-                    }
-                    console.log('Connected to ' + peripheral.id);
+const Button = ({ title, onPress, style, textStyle }) =>
+    <TouchableOpacity style={[ styles.button, style ]} onPress={onPress}>
+        <Text style={[ styles.buttonText, textStyle ]}>{title.toUpperCase()}</Text>
+    </TouchableOpacity>
 
 
-                    setTimeout(() => {
-
-                        /* Test read current RSSI value
-                        BleManager.retrieveServices(peripheral.id).then((peripheralData) => {
-                          console.log('Retrieved peripheral services', peripheralData);
-
-                          BleManager.readRSSI(peripheral.id).then((rssi) => {
-                            console.log('Retrieved actual RSSI value', rssi);
-                          });
-                        });*/
-
-                        // Test using bleno's pizza example
-                        // https://github.com/sandeepmistry/bleno/tree/master/examples/pizza
-                        BleManager.retrieveServices(peripheral.id).then((peripheralInfo) => {
-                            console.log(peripheralInfo);
-                            var service = '13333333-3333-3333-3333-333333333337';
-                            var bakeCharacteristic = '13333333-3333-3333-3333-333333330003';
-                            var crustCharacteristic = '13333333-3333-3333-3333-333333330001';
-
-                            setTimeout(() => {
-                                BleManager.startNotification(peripheral.id, service, bakeCharacteristic).then(() => {
-                                    console.log('Started notification on ' + peripheral.id);
-                                    setTimeout(() => {
-                                        BleManager.write(peripheral.id, service, crustCharacteristic, [0]).then(() => {
-                                            console.log('Writed NORMAL crust');
-                                            BleManager.write(peripheral.id, service, bakeCharacteristic, [1,95]).then(() => {
-                                                console.log('Writed 351 temperature, the pizza should be BAKED');
-                                                /*
-                                                var PizzaBakeResult = {
-                                                  HALF_BAKED: 0,
-                                                  BAKED:      1,
-                                                  CRISPY:     2,
-                                                  BURNT:      3,
-                                                  ON_FIRE:    4
-                                                };*/
-                                            });
-                                        });
-
-                                    }, 500);
-                                }).catch((error) => {
-                                    console.log('Notification error', error);
-                                });
-                            }, 200);
-                        });
-
-                    }, 900);
-                }).catch((error) => {
-                    console.log('Connection error', error);
-                });
-            }
-        }
-    }
-
-    render() {
-        const list = Array.from(this.state.peripherals.values());
-        const dataSource = ds.cloneWithRows(list);
-
-
-        return (
-            <View style={styles.container}>
-                <TouchableHighlight style={{marginTop: 40,margin: 20, padding:20, backgroundColor:'#ccc'}} onPress={() => this.startScan() }>
-                    <Text>Scan Bluetooth ({this.state.scanning ? 'on' : 'off'})</Text>
-                </TouchableHighlight>
-                <TouchableHighlight style={{marginTop: 0,margin: 20, padding:20, backgroundColor:'#ccc'}} onPress={() => this.retrieveConnected() }>
-                    <Text>Retrieve connected peripherals</Text>
-                </TouchableHighlight>
-                <ScrollView style={styles.scroll}>
-                    {(list.length == 0) &&
-                    <View style={{flex:1, margin: 20}}>
-                        <Text style={{textAlign: 'center'}}>No peripherals</Text>
-                    </View>
-                    }
-                    <ListView
-                        enableEmptySections={true}
-                        dataSource={dataSource}
-                        renderRow={(item) => {
-                            const color = item.connected ? 'green' : '#fff';
-                            return (
-                                <TouchableHighlight onPress={() => this.test(item) }>
-                                    <View style={[styles.row, {backgroundColor: color}]}>
-                                        <Text style={{fontSize: 12, textAlign: 'center', color: '#333333', padding: 10}}>{item.name}</Text>
-                                        <Text style={{fontSize: 8, textAlign: 'center', color: '#333333', padding: 10}}>{item.id}</Text>
+const DeviceList = ({ devices, connectedId, showConnectedIcon, onDevicePress }) =>
+    <ScrollView style={styles.container}>
+        <View style={styles.listContainer}>
+            {devices.map((device, i) => {
+                return (
+                    <TouchableHighlight
+                        underlayColor='#DDDDDD'
+                        key={`${device.id}_${i}`}
+                        style={styles.listItem} onPress={() => onDevicePress(device)}>
+                        <View style={{ flexDirection: 'row' }}>
+                            {showConnectedIcon
+                                ? (
+                                    <View style={{ width: 48, height: 48, opacity: 0.4 }}>
+                                        {connectedId === device.id
+                                            ? (
+                                                <Image style={{ resizeMode: 'contain', width: 24, height: 24, flex: 1 }} source={require('./images/ic_done_black_24dp.png')} />
+                                            ) : null}
                                     </View>
-                                </TouchableHighlight>
-                            );
-                        }}
-                    />
-                </ScrollView>
+                                ) : null}
+                            <View style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center' }}>
+                                <Text style={{ fontWeight: 'bold' }}>{device.name}</Text>
+                                <Text>{`<${device.id}>`}</Text>
+                            </View>
+                        </View>
+                    </TouchableHighlight>
+                )
+            })}
+        </View>
+    </ScrollView>
+
+class BluetoothScanner extends Component {
+    constructor (props) {
+        super(props)
+        this.state = {
+            isEnabled: false,
+            discovering: false,
+            devices: [],
+            unpairedDevices: [],
+            connected: false,
+            section: 0
+        }
+    }
+
+    componentWillMount () {
+        Promise.all([
+            BluetoothSerial.isEnabled(),
+            BluetoothSerial.list()
+        ])
+            .then((values) => {
+                const [ isEnabled, devices ] = values
+                this.setState({ isEnabled, devices })
+            })
+
+        BluetoothSerial.on('bluetoothEnabled', () => Toast.showShortBottom('Bluetooth enabled'))
+        BluetoothSerial.on('bluetoothDisabled', () => Toast.showShortBottom('Bluetooth disabled'))
+        BluetoothSerial.on('error', (err) => console.log(`Error: ${err.message}`))
+        BluetoothSerial.on('connectionLost', () => {
+            if (this.state.device) {
+                Toast.showShortBottom(`Connection to device ${this.state.device.name} has been lost`)
+            }
+            this.setState({ connected: false })
+        })
+    }
+
+    /**
+     * [android]
+     * request enable of bluetooth from user
+     */
+    requestEnable () {
+        BluetoothSerial.requestEnable()
+            .then((res) => this.setState({ isEnabled: true }))
+            .catch((err) => Toast.showShortBottom(err.message))
+    }
+
+    /**
+     * [android]
+     * enable bluetooth on device
+     */
+    enable () {
+        BluetoothSerial.enable()
+            .then((res) => this.setState({ isEnabled: true }))
+            .catch((err) => Toast.showShortBottom(err.message))
+    }
+
+    /**
+     * [android]
+     * disable bluetooth on device
+     */
+    disable () {
+        BluetoothSerial.disable()
+            .then((res) => this.setState({ isEnabled: false }))
+            .catch((err) => Toast.showShortBottom(err.message))
+    }
+
+    /**
+     * [android]
+     * toggle bluetooth
+     */
+    toggleBluetooth (value) {
+        if (value === true) {
+            this.enable()
+        } else {
+            this.disable()
+        }
+    }
+
+    /**
+     * [android]
+     * Discover unpaired devices, works only in android
+     */
+    discoverUnpaired () {
+        if (this.state.discovering) {
+            return false
+        } else {
+            this.setState({ discovering: true })
+            BluetoothSerial.discoverUnpairedDevices()
+                .then((unpairedDevices) => {
+                    this.setState({ unpairedDevices, discovering: false })
+                })
+                .catch((err) => Toast.showShortBottom(err.message))
+        }
+    }
+
+    /**
+     * [android]
+     * Discover unpaired devices, works only in android
+     */
+    cancelDiscovery () {
+        if (this.state.discovering) {
+            BluetoothSerial.cancelDiscovery()
+                .then(() => {
+                    this.setState({ discovering: false })
+                })
+                .catch((err) => Toast.showShortBottom(err.message))
+        }
+    }
+
+    /**
+     * [android]
+     * Pair device
+     */
+    pairDevice (device) {
+        BluetoothSerial.pairDevice(device.id)
+            .then((paired) => {
+                if (paired) {
+                    Toast.showShortBottom(`Device ${device.name} paired successfully`)
+                    const devices = this.state.devices
+                    devices.push(device)
+                    this.setState({ devices, unpairedDevices: this.state.unpairedDevices.filter((d) => d.id !== device.id) })
+                } else {
+                    Toast.showShortBottom(`Device ${device.name} pairing failed`)
+                }
+            })
+            .catch((err) => Toast.showShortBottom(err.message))
+    }
+
+    /**
+     * Connect to bluetooth device by id
+     * @param  {Object} device
+     */
+    connect (device) {
+        this.setState({ connecting: true })
+        BluetoothSerial.connect(device.id)
+            .then((res) => {
+                Toast.showShortBottom(`Connected to device ${device.name}`)
+                this.setState({ device, connected: true, connecting: false })
+            })
+            .catch((err) => Toast.showShortBottom(err.message))
+    }
+
+    /**
+     * Disconnect from bluetooth device
+     */
+    disconnect () {
+        BluetoothSerial.disconnect()
+            .then(() => this.setState({ connected: false }))
+            .catch((err) => Toast.showShortBottom(err.message))
+    }
+
+    /**
+     * Toggle connection when we have active device
+     * @param  {Boolean} value
+     */
+    toggleConnect (value) {
+        if (value === true && this.state.device) {
+            this.connect(this.state.device)
+        } else {
+            this.disconnect()
+        }
+    }
+
+    /**
+     * Write message to device
+     * @param  {String} message
+     */
+    write (message) {
+        if (!this.state.connected) {
+            Toast.showShortBottom('You must connect to device first')
+        }
+
+        BluetoothSerial.write(message)
+            .then((res) => {
+                Toast.showShortBottom('Successfuly wrote to device')
+                this.setState({ connected: true })
+            })
+            .catch((err) => Toast.showShortBottom(err.message))
+    }
+
+    onDevicePress (device) {
+        if (this.state.section === 0) {
+            this.connect(device)
+        } else {
+            this.pairDevice(device)
+        }
+    }
+
+    writePackets (message, packetSize = 64) {
+        const toWrite = iconv.encode(message, 'cp852')
+        const writePromises = []
+        const packetCount = Math.ceil(toWrite.length / packetSize)
+
+        for (var i = 0; i < packetCount; i++) {
+            const packet = new Buffer(packetSize)
+            packet.fill(' ')
+            toWrite.copy(packet, 0, i * packetSize, (i + 1) * packetSize)
+            writePromises.push(BluetoothSerial.write(packet))
+        }
+
+        Promise.all(writePromises)
+            .then((result) => {
+            })
+    }
+
+    render () {
+        const activeTabStyle = { borderBottomWidth: 6, borderColor: '#009688' }
+        return (
+            <View style={{ flex: 1 }}>
+                <View style={styles.topBar}>
+                    <Text style={styles.heading}>Bluetooth Connection </Text>
+                    {Platform.OS === 'android'
+                        ? (
+                            <View style={styles.enableInfoWrapper}>
+                                <Text style={{ fontSize: 12, color: '#FFFFFF' }}>
+                                    {!this.state.isEnabled ? 'disable' : 'enable'}
+                                </Text>
+                                <Switch
+                                    onValueChange={this.toggleBluetooth.bind(this)}
+                                    value={this.state.isEnabled} />
+                            </View>
+                        ) : null}
+                </View>
+
+                {Platform.OS === 'android'
+                    ? (
+                        <View style={[styles.topBar, { justifyContent: 'center', paddingHorizontal: 0 }]}>
+                            <TouchableOpacity style={[styles.tab, this.state.section === 0 && activeTabStyle]} onPress={() => this.setState({ section: 0 })}>
+                                <Text style={{ fontSize: 14, color: '#FFFFFF' }}>PAIRED DEVICES</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[styles.tab, this.state.section === 1 && activeTabStyle]} onPress={() => this.setState({ section: 1 })}>
+                                <Text style={{ fontSize: 14, color: '#FFFFFF' }}>UNPAIRED DEVICES</Text>
+                            </TouchableOpacity>
+                        </View>
+                    ) : null}
+                {this.state.discovering && this.state.section === 1
+                    ? (
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <ActivityIndicator
+                                style={{ marginBottom: 15 }}
+                                size={60} />
+                            <Button
+                                textStyle={{ color: '#FFFFFF' }}
+                                style={styles.buttonRaised}
+                                title='Cancel Discovery'
+                                onPress={() => this.cancelDiscovery()} />
+                        </View>
+                    ) : (
+                        <DeviceList
+                            showConnectedIcon={this.state.section === 0}
+                            connectedId={this.state.device && this.state.device.id}
+                            devices={this.state.section === 0 ? this.state.devices : this.state.unpairedDevices}
+                            onDevicePress={(device) => this.onDevicePress(device)} />
+                    )}
+
+
+                <View style={{ alignSelf: 'flex-end', height: 52 }}>
+                    <ScrollView
+                        horizontal
+                        contentContainerStyle={styles.fixedFooter}>
+                        {Platform.OS === 'android' && this.state.section === 1
+                            ? (
+                                <Button
+                                    title={this.state.discovering ? '... Discovering' : 'Discover devices'}
+                                    onPress={this.discoverUnpaired.bind(this)} />
+                            ) : null}
+                        {Platform.OS === 'android' && !this.state.isEnabled
+                            ? (
+                                <Button
+                                    title='Request enable'
+                                    onPress={() => this.requestEnable()} />
+                            ) : null}
+                    </ScrollView>
+                </View>
             </View>
-        );
+        )
     }
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex: 0.9,
+        backgroundColor: '#F5FCFF'
+    },
+    topBar: {
+        height: 56,
+        paddingHorizontal: 16,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center' ,
+        elevation: 6,
+        backgroundColor: '#7B1FA2'
+    },
+    heading: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        alignSelf: 'center',
+        color: '#FFFFFF'
+    },
+    enableInfoWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    tab: {
+        alignItems: 'center',
+        flex: 0.5,
+        height: 56,
+        justifyContent: 'center',
+        borderBottomWidth: 6,
+        borderColor: 'transparent'
+    },
+    connectionInfoWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 25
+    },
+    connectionInfo: {
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        fontSize: 18,
+        marginVertical: 10,
+        color: '#238923'
+    },
+    listContainer: {
+        borderColor: '#ccc',
+        borderTopWidth: 0.5
+    },
+    listItem: {
         flex: 1,
-        backgroundColor: '#FFF',
-        width: window.width,
-        height: window.height
+        height: 48,
+        paddingHorizontal: 16,
+        borderColor: '#ccc',
+        borderBottomWidth: 0.5,
+        justifyContent: 'center'
     },
-    scroll: {
-        flex: 1,
-        backgroundColor: '#f0f0f0',
-        margin: 10,
+    fixedFooter: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderTopWidth: 1,
+        borderTopColor: '#ddd'
     },
-    row: {
-        margin: 10
+    button: {
+        height: 36,
+        margin: 5,
+        paddingHorizontal: 16,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-});
+    buttonText: {
+        color: '#7B1FA2',
+        fontWeight: 'bold',
+        fontSize: 14
+    },
+    buttonRaised: {
+        backgroundColor: '#7B1FA2',
+        borderRadius: 2,
+        elevation: 2
+    }
+})
+
+export default BluetoothScanner
+
