@@ -193,6 +193,13 @@ class BluetoothScanner extends Component {
             .then((res) => {
                 Toast.showShortBottom(`Connected to device ${device.name}`)
                 this.setState({ device, connected: true, connecting: false })
+
+                BluetoothSerial.readFromDevice().then((data) => {
+                   var date = data.split(", ");
+                   global.latitudine = date[0].substr(9, 8);
+                   global.longitude = date[1].substr(9, 8);
+                 //  alert(Parse.float(global.latitude))
+                });
             })
             .catch((err) => Toast.showShortBottom(err.message))
     }
