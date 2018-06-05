@@ -109,7 +109,8 @@ export default class Change extends React.Component {
             birthdate: '',
             language: '',
             location: '',
-            gender: ''
+            gender: '',
+            weight: ''
         }
     }
 
@@ -166,6 +167,11 @@ export default class Change extends React.Component {
     onPressLanguage = (value) => {
         global.user.language = value;
         this.setState({language: value});
+    }
+
+    onPressWeight = (value) => {
+        global.user.weight = value;
+        this.setState({weight: value});
     }
 
     renderLocation = () => {
@@ -316,6 +322,25 @@ export default class Change extends React.Component {
         )
     }
 
+    renderWeight = () => {
+        return (
+            <View>
+                <MaterialCommunityIcons
+                    name="weight-kilogram"
+                    size={30}
+                    color="#000" />
+                <TextInput
+                    placeholder={global.user.weight}
+                    underlineColorAndroid="transparent"
+                    clearButtonMode='while-editing'
+                    onChangeText={(value) => {
+                        this.onPressCity(value)
+                    }}
+                />
+            </View>
+        )
+    }
+
     render() {
         return (
             <ScrollView style={styles.scroll}>
@@ -343,6 +368,9 @@ export default class Change extends React.Component {
                     </Card>
                     <Card>
                         {this.renderLanguage()}
+                    </Card>
+                    <Card>
+                        {this.renderWeight()}
                     </Card>
 
                     <TouchableHighlight  overlay="transparent" onPress={this.handleChanges}>
