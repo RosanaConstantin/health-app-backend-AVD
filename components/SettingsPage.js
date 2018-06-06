@@ -45,12 +45,14 @@ export default class SettingsPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-           pushNotifications: global.user.notifications
+           pushNotifications: global.user.notifications,
+            badge: global.bagde
         }
     }
 
   onChangePushNotifications = () => {
     this.setState({pushNotifications: !this.state.pushNotifications});
+    global.user.notifications = !this.state.pushNotifications;
       fetch(global.ip + 'api-user-update-notifications', {
           method: 'POST',
           headers: {

@@ -49,6 +49,7 @@ export default class Dashboard extends React.Component {
             {
               page: "NotificationScreen",
               icon: "notifications",
+                badgeNumber: global.user.notifications ? global.badge : 0,
               iconText: "Notification"
             },
              

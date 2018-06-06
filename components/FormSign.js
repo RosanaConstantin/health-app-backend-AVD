@@ -102,7 +102,7 @@ export default class FormInsideSign extends React.Component {
                           .then((response) => response.json())
                           .then((response) => {
                             if (response.error) {
-                              alert(response.error + ' Error while gettig user profile!');
+                              alert(response.error + ' Error while getting user profile!');
                             } else {
                               userProfile = response.result;
                               global.user = {
@@ -121,8 +121,27 @@ export default class FormInsideSign extends React.Component {
                                 notifications: userProfile.profile.notifications,
                                   steps: userProfile.profile.stepsGoal || 0,
                                   weight: userProfile.profile.weight || 53
-                              }; 
+                              };
+                              global.notifications =[];
+                              global.bagde = 0;
                               Actions.dashboard();
+                                fetch(global.ip + 'api-notification-get', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                                        'X-Parse-Session-Token': global.sessionToken
+                                    }
+                                })
+                                    .then((response) => response.json())
+                                    .then((response) => {
+                                        if (response.error) {
+                                            alert(response.error + ' Error while getting user notifications!');
+                                        } else {
+                                            global.notifications = response.result;
+                                            global.badge = response.result.length;
+                                        }
+                                    })
                             }
                           })
                           .catch((error) => {

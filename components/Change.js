@@ -330,7 +330,7 @@ export default class Change extends React.Component {
                     size={30}
                     color="#000" />
                 <TextInput
-                    placeholder={global.user.weight}
+                    placeholder={global.user.weight.toString()}
                     underlineColorAndroid="transparent"
                     clearButtonMode='while-editing'
                     onChangeText={(value) => {
