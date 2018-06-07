@@ -35,6 +35,7 @@ class CardNotif extends Component {
         this.state = {
             message: this.props.message,
             id: this.props.id,
+            indexOf: this.props.indexOf,
             activeRowKey: null
         }
     }
@@ -80,7 +81,7 @@ class CardNotif extends Component {
                                 {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                                 {text: 'Yes', onPress: () => {
 
-                                        this.props.parentList.refreshList(deletingRow);
+                                        this.props.parentList(this.props.indexOf);
                                     }},
                             ],
                             { cancelable: true }
@@ -100,7 +101,7 @@ class CardNotif extends Component {
                     <Entypo
                         size={24}
                         name="notification"/>
-                    <Text style={styles.notif}>{this.state.message}</Text>
+                    <Text style={styles.notif}>{this.props.message}</Text>
                 </View>
             </Swipeout>
 

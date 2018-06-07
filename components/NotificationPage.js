@@ -24,17 +24,42 @@ export default class NotificationPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            notifications: global.notifications,
-            deletedRowKey: null
+            notifications: [],
+            deletedRowKey: null,
         }
     }
 
+    componentDidMount() {
+        var aux = global.notifications;
+        this.setState({notifications: aux});
+    }
+
     refreshList = (deletedKey) => {
-        var removeIndexState = this.state.notifications.map(function(item) { return item.objectId; }).indexOf(deletedKey);
-        this.state.notifications.splice(removeIndexState,1);
-        var removeIndexGlobal = global.notifications.map(function(item) { return item.objectId; }).indexOf(deletedKey);
-        global.notifications.splice(removeIndexGlobal,1);
+        // global.notifications.splice(deletedKey,1);
         global.badge--;
+        var objectId = this.state.notifications[deletedKey].objectId;
+        this.setState({notification: this.state.notifications.splice(deletedKey,1)});
+        fetch(global.ip + 'api-notification-delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                'X-Parse-Session-Token': global.sessionToken
+            },
+            body: JSON.stringify(
+                {notificationId: objectId}
+            )
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.error) {
+                    alert(response.error + ' Error while deleting user notifications!');
+                }
+            })
+            .catch((error) => {
+                alert(error);
+            })
+            .done()
     }
 
     render() {
@@ -54,11 +79,13 @@ export default class NotificationPage extends React.Component {
                             <Text style={styles.title}>Your notifications</Text>
                             <ScrollView style={styles.containerScroll}>
                                 {this.state.notifications.map((notif, index) => {
-                                    return (<CardNotif
+                                    return (
+                                        <CardNotif
                                         key={index}
                                         id={notif.objectId}
                                         message={notif.message}
-                                        parentList={this}
+                                        indexOf={index}
+                                        parentList={this.refreshList}
                                     />)
                                 })}
                             </ScrollView>

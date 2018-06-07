@@ -154,7 +154,7 @@ export default class Change extends React.Component {
     }
     onPressBirth = (value) => {
         global.user.birthdate = value;
-      //  this.setState({birthdate: value});
+      this.setState({birthdate: {__type: "Date", iso: (new Date(value)).toISOString()}});
     }
     onPressCity = (value) => {
         global.user.location = value;
