@@ -139,7 +139,13 @@ export default class FormInsideSign extends React.Component {
                                             alert(response.error + ' Error while getting user notifications!');
                                         } else {
                                             global.notifications = response.result;
-                                            global.badge = response.result.length;
+                                            var lenght = response.result.length;
+                                            for(var i = 0; i < response.result.length; i++){
+                                                if(response.result[i].wasRead){
+                                                    lenght--;
+                                                }
+                                            }
+                                            global.badge = lenght;
                                         }
                                     })
                             }

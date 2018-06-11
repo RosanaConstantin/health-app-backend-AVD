@@ -109,9 +109,9 @@ export default class StepsPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-           steps: /*global.user.steps*/200,
-            actualSteps: 20,
-            weight:/*global.user.weight*/53
+           steps: global.user.steps,
+            actualSteps: 0,
+            weight:global.user.weight
         }
     }
     onPressGoal(value){

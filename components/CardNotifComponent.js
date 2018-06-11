@@ -8,7 +8,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Feather from 'react-native-vector-icons/Feather'
 import Swipeout from 'react-native-swipeout';
 
 const styles = StyleSheet.create({
@@ -20,12 +20,17 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         padding:10,
         margin:20,
-        borderRadius:15
+        borderRadius:15,
+        alignItems:"flex-start"
     },
     notif: {
         fontSize: 18,
         color:'#fff',
-        marginLeft: 15
+        marginLeft: 15,
+        width:300,
+    },
+    icon: {
+        marginLeft:5
     }
 });
 
@@ -44,6 +49,16 @@ class CardNotif extends Component {
 
     readNotification(id, wasRead) {
         this.setState({wasRead: wasRead});
+        for(var i = 0; i < global.notifications.length; i++){
+            if(global.notifications[i].objectId.localeCompare(id) === 0 ){
+                global.notifications[i].wasRead = wasRead;
+            }
+        }
+        if(wasRead){
+            global.badge--;
+        } else {
+            global.badge++;
+        }
         fetch(global.ip + 'api-notification-mark-read', {
             method: 'POST',
             headers: {
@@ -70,12 +85,6 @@ class CardNotif extends Component {
                 alert(error);
             })
             .done();
-        if(wasRead){
-            global.badge--;
-        } else {
-            global.badge++;
-        }
-
     }
 
 
@@ -140,6 +149,12 @@ class CardNotif extends Component {
                         size={24}
                         name="notification"/>
                     <Text style={styles.notif}>{this.props.message }</Text>
+                    <Feather
+                        iconStyle={styles.icon}
+                        size={24}
+                        color={this.state.wasRead?'#646464':'#ff0026'}
+                        onPress={() => this.readNotification(this.props.id, !this.state.wasRead)}
+                        name="check-circle"/>
                 </View>
             </Swipeout>
 
