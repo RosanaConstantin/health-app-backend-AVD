@@ -126,7 +126,9 @@ export default class StepsPage extends React.Component {
                 'X-Parse-Session-Token': global.sessionToken
             },
             body:JSON.stringify({
-                profile: this.state.steps
+                profile: {
+                    stepsGoal: this.state.steps
+                }
             })
         })
             .then((response) => response.json())
@@ -134,6 +136,7 @@ export default class StepsPage extends React.Component {
                 if (response.error) {
                     alert(response.error + ' Error while setting your goal!');
                 } else {
+                    alert(this.state.steps)
                     alert('Successfully goal set!');
                 }
             })
@@ -158,14 +161,16 @@ export default class StepsPage extends React.Component {
                         bgColor="#f2efed"
                         The custom styling which will be applied to the outer circle
                     >
+                        <Image style={{width:50, height:50}} source={require('../assets/pedometer.png')}/>
                         <Text style={{ fontSize: 18 }}>{this.state.actualSteps + ' steps'}</Text>
                     </ProgressCircle>
+                    <Text style={{ fontSize: 25, marginTop:15, marginLeft:50 }}>{this.state.steps + ' steps'}</Text>
                 </View>
                 <View>
                     <Text style={styles.textSet}>Change it only if you want more!</Text>
                 </View>
                 <View style={styles.stepsSet}>
-                    <TextInput  placeholder={this.state.steps.toString()}
+                    <TextInput /* placeholder={this.state.steps.toString()}*/
                                 underlineColorAndroid="transparent"
                                 clearButtonMode='while-editing'
                                 style={styles.textInput}
