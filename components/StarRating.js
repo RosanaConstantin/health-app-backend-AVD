@@ -7,7 +7,7 @@ export default  class StarRatingForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      starCount: 0
+      starCount: 1
     };
   }
 
@@ -15,6 +15,7 @@ export default  class StarRatingForm extends React.Component {
     this.setState({
       starCount: rating
     });
+    global.stars = rating;
   }
 
   render() {
@@ -22,6 +23,7 @@ export default  class StarRatingForm extends React.Component {
       <StarRating
         disabled={false}
         maxStars={5}
+        isHalfStarEnabled={true}
         rating={this.state.starCount}
         selectedStar={(rating) => this.onStarRatingPress(rating)}
       />

@@ -8,8 +8,8 @@ import StarRatingForm from './StarRating'
 const styles = StyleSheet.create({
   homeButton: {
     paddingTop: 10,
-    width: 100,
-    height: 30,
+    width: 150,
+    height: 50,
     paddingBottom: 10,
     backgroundColor: '#000000',
 },
@@ -27,6 +27,34 @@ export default class Rate extends React.Component {
       setModalVisible(visible) {
         this.setState({modalVisible: visible});
       }
+      saveRatingNumber() {
+
+          fetch(global.ip + 'api-rating-save', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                  'X-Parse-Session-Token': global.sessionToken
+              },
+              body: JSON.stringify({
+                  rating: {
+                      stars: global.stars
+                  }
+              })
+          })
+              .then((response) => response.json())
+              .then((response) => {
+                  if (response.error) {
+                      alert(response.error + ' Error while saving the starts');
+                  } else {
+                      alert(response.result);
+                  }
+              })
+              .catch((error) => {
+                  alert(error);
+              })
+              .done()
+      }
     
       render() {
         return (
@@ -40,8 +68,8 @@ export default class Rate extends React.Component {
           <TouchableHighlight
               style={styles.homeButton}
               overlay="transparent"
-                onPress={() => {Actions.dashboard();this.setModalVisible(!this.state.modalVisible); }}>
-                <Text style={styles.homeButtonText}>Back to Home</Text>
+                onPress={() => {Actions.dashboard();this.setModalVisible(!this.state.modalVisible); this.saveRatingNumber();}}>
+                <Text style={styles.homeButtonText}>Send and go back to Home</Text>
               </TouchableHighlight>
       </Overlay>
         );

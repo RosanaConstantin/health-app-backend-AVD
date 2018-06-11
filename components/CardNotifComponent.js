@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import {
     Text,
     View,
-    Card,
     Image,
     Alert,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacity
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Swipeout from 'react-native-swipeout';
 
 const styles = StyleSheet.create({
@@ -36,9 +37,47 @@ class CardNotif extends Component {
             message: this.props.message,
             id: this.props.id,
             indexOf: this.props.indexOf,
-            activeRowKey: null
+            activeRowKey: null,
+            wasRead: this.props.wasRead
         }
     }
+
+    readNotification(id, wasRead) {
+        this.setState({wasRead: wasRead});
+        fetch(global.ip + 'api-notification-mark-read', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                'X-Parse-Session-Token': global.sessionToken
+            },
+            body:JSON.stringify({
+                notif: {
+                    notificationId: id,
+                    wasRead: wasRead
+                }
+            })
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.error) {
+                    alert(response.error + ' Error while updating your notification!');
+                } else {
+                    alert('Successfully update notification!');
+                }
+            })
+            .catch((error) => {
+                alert(error);
+            })
+            .done();
+        if(wasRead){
+            global.badge--;
+        } else {
+            global.badge++;
+        }
+
+    }
+
 
     render() {
        const swipeSettings ={
@@ -93,15 +132,14 @@ class CardNotif extends Component {
             rowId: this.props.id,
             sectionId: 1
         }
-
-
         return (
             <Swipeout {...swipeSettings}>
                 <View style={styles.card}>
+
                     <Entypo
                         size={24}
                         name="notification"/>
-                    <Text style={styles.notif}>{this.props.message}</Text>
+                    <Text style={styles.notif}>{this.props.message }</Text>
                 </View>
             </Swipeout>
 

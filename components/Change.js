@@ -13,7 +13,7 @@ import {
     TouchableHighlight,
     View,
 } from 'react-native'
-
+import PhotoUpload from 'react-native-photo-upload'
 import {Actions} from 'react-native-router-flux';
 
 import images from './images'
@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
         height: 170,
         marginBottom: 15,
         width: 170,
-        marginLeft: 80
     },
     userNameText: {
         color: '#FFF',
@@ -110,7 +109,8 @@ export default class Change extends React.Component {
             language: '',
             location: '',
             gender: '',
-            weight: ''
+            weight: '',
+            photo: ''
         }
     }
 
@@ -167,6 +167,11 @@ export default class Change extends React.Component {
     onPressLanguage = (value) => {
         global.user.language = value;
         this.setState({language: value});
+    }
+
+    saveImageToProfile(avatar){
+        global.user.avatar = avatar;
+        this.setState({photo: avatar});
     }
 
     onPressWeight = (value) => {
@@ -312,10 +317,16 @@ export default class Change extends React.Component {
                     source={images['background']}
                 >
                     <View style={styles.headerColumn}>
-                        <Image
-                            style={styles.userImage}
-                            source={global.user.avatar}
-                        />
+                        <PhotoUpload
+                            onPhotoSelect={avatar => {
+                                this.saveImageToProfile(avatar);
+                            }}
+                                >
+                            <Image
+                                style={styles.userImage}
+                                source={{uri: 'data:image/png;base64,' +  global.user.avatar}}
+                            />
+                        </PhotoUpload>
                     </View>
                 </ImageBackground>
             </View>
@@ -334,7 +345,7 @@ export default class Change extends React.Component {
                     underlineColorAndroid="transparent"
                     clearButtonMode='while-editing'
                     onChangeText={(value) => {
-                        this.onPressCity(value)
+                        this.onPressWeight(value)
                     }}
                 />
             </View>

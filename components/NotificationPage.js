@@ -17,6 +17,12 @@ const styles = StyleSheet.create({
         marginTop:20,
         marginBottom:20,
         fontSize:25
+    },
+    warningText:{
+        fontSize:30,
+        color:"#9897b4",
+        textAlign:"center",
+        marginTop:"50%"
     }
 })
 export default class NotificationPage extends React.Component {
@@ -66,13 +72,13 @@ export default class NotificationPage extends React.Component {
         return (
             !global.user.notifications ? (
                 <View>
-                    <Text>
+                    <Text style={styles.warningText}>
                         You must be enrolled in notifications. Go to settings!!</Text>
                 </View>
             ) : (
                     this.state.notifications.length === 0 ? (
                         <View>
-                            <Text>You don't have notifications!</Text>
+                            <Text style={styles.warningText}>You don't have notifications!</Text>
                         </View>
                     ) : (
                         <View style={styles.container}>
@@ -85,6 +91,7 @@ export default class NotificationPage extends React.Component {
                                         id={notif.objectId}
                                         message={notif.message}
                                         indexOf={index}
+                                        wasRead={notif.wasRead}
                                         parentList={this.refreshList}
                                     />)
                                 })}

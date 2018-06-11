@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, StyleSheet, Text, View, Picker } from 'react-native'
+import {ScrollView, StyleSheet, Text, View, Picker, Alert} from 'react-native'
 import { Avatar, List, ListItem } from 'react-native-elements'
 import Entypo from 'react-native-vector-icons/Entypo'
 import Icon from './Icon'
@@ -83,28 +83,38 @@ export default class SettingsPage extends React.Component {
   }
 
     destoyUser = () => {
-        fetch(global.ip + 'api-user-delete', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
-                'X-Parse-Session-Token': global.sessionToken
-            }
+        Alert.alert(
+            'Alert',
+            'Are you sure you want to delete ?',
+            [
+                {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'Yes', onPress: () => {
+                        fetch(global.ip + 'api-user-delete', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                                'X-Parse-Session-Token': global.sessionToken
+                            }
 
-        })
-            .then((response) => response.json())
-            .then((response) => {
-                if (response.error) {
-                    alert(response.error + ' Error while deleting the user !');
-                } else {
-                    alert('Successfully deleted the user');
-                    Actions.home();
-                }
-            })
-            .catch((error) => {
-                alert(error);
-            })
-            .done();
+                        })
+                            .then((response) => response.json())
+                            .then((response) => {
+                                if (response.error) {
+                                    alert(response.error + ' Error while deleting the user !');
+                                } else {
+                                    alert('Successfully deleted the user');
+                                    Actions.home();
+                                }
+                            })
+                            .catch((error) => {
+                                alert(error);
+                            })
+                            .done();
+                    }},
+            ],
+            { cancelable: true }
+        );
     }
 
   changeProfile = () =>{
@@ -155,7 +165,7 @@ export default class SettingsPage extends React.Component {
               <Avatar
                 large
                 rounded
-                source={global.user.avatar}
+                source={{uri: 'data:image/png;base64,' + global.user.avatar}}
               />
             </View>
             <View>

@@ -7,8 +7,8 @@ import { Actions } from 'react-native-router-flux';
 const styles = StyleSheet.create({
     homeButton: {
       paddingTop: 10,
-      width: 100,
-      height: 30,
+      width: 150,
+      height: 50,
       paddingBottom: 10,
       backgroundColor: '#000000',
   },
@@ -27,6 +27,34 @@ export default class FeedBack extends React.Component {
         this.setState({ modalVisible: visible });
     }
 
+    saveFeedback() {
+        fetch(global.ip + 'api-rating-save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                'X-Parse-Session-Token': global.sessionToken
+            },
+            body: JSON.stringify({
+                rating: {
+                    message: this.state.text
+                }
+            })
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.error) {
+                    alert(response.error + ' Error while saving the feedback message');
+                } else {
+                    alert(response.result);
+                }
+            })
+            .catch((error) => {
+                alert(error);
+            })
+            .done()
+    }
+
     render() {
         return (
             <Overlay visible={this.state.modalVisible}
@@ -42,8 +70,8 @@ export default class FeedBack extends React.Component {
                 <TouchableHighlight
                     overlay="transparent"
                     style={styles.homeButton}
-                    onPress={() => { Actions.dashboard(); this.setModalVisible(!this.state.modalVisible); }}>
-                    <Text style={styles.homeButtonText}>Send feedback</Text>
+                    onPress={() => { Actions.dashboard(); this.setModalVisible(!this.state.modalVisible); this.saveFeedback();}}>
+                    <Text style={styles.homeButtonText}>Send feedback and go back to Home</Text>
                 </TouchableHighlight>
             </Overlay>
         );
