@@ -109,8 +109,8 @@ export default class StepsPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-           steps: global.user.steps,
-            actualSteps: 0,
+           steps: global.user.steps*100,
+            actualSteps: 100,
             weight:global.user.weight
         }
     }
@@ -193,7 +193,7 @@ export default class StepsPage extends React.Component {
                         <Image
                             style={{width:40, height:40, alignSelf:"center"}}
                             source={require('../assets/calories.png')}/>
-                            <Text style={[styles.statisticsText, {marginTop:10}]}>{(this.state.actualSteps / 2200).toPrecision(2)}</Text>
+                            <Text style={[styles.statisticsText, {marginTop:10}]}>{( 300 * this.state.actualSteps / 10000).toPrecision(2)}</Text>
 
                         <Text style={[styles.details, {marginTop:30}]}>*For an average of 2200 steps/mile</Text>
                     </View>

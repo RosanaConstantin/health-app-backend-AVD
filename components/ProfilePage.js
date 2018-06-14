@@ -117,7 +117,7 @@ export default class ProfilePage extends React.Component {
           <View style={styles.headerColumn}>
             <Image
               style={styles.userImage}
-              source={ {uri: global.user.avatar}}
+              source={{uri: 'data:image/png;base64,' + global.user.avatar}}
             />
             <Text style={styles.userNameText}>{global.user.firstName + ' ' + global.user.lastName}</Text>
             <View style={styles.userAddressRow}>
