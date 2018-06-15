@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import {Text,View, Image, ImageBackground, StyleSheet, Button, TouchableHighlight} from 'react-native';
-import ImageSlider from 'react-native-image-slider';
+import Carousel from 'react-native-carousel';
 
 const images = [
-    {source: require('../assets/nose.png'), width: 100, height: 100},
-    {source: require('../assets/sneezing.png'), width: 100, height: 100},
-    {source: require('../assets/fatigue.png'), width: 100, height: 100},
-    {source: require('../assets/cough.png'), width: 100, height: 100},
-    {source: require('../assets/chills.png'), width: 100, height: 100},
-    {source: require('../assets/sore.png'), width: 100, height: 100},
-    {source: require('../assets/headache.png'), width: 100, height: 100},
-    {source: require('../assets/fever.png'), width: 100, height: 100},
+    {source: require('../assets/nose.png')},
+    {source: require('../assets/sneezing.png')},
+    {source: require('../assets/fatigue.png')},
+    {source: require('../assets/cough.png')},
+    {source: require('../assets/chills.png')},
+    {source: require('../assets/sore.png')},
+    {source: require('../assets/headache.png')},
+    {source: require('../assets/fever.png')},
 ];
 
 export default class TemperaturePage extends React.Component {
@@ -61,19 +61,39 @@ export default class TemperaturePage extends React.Component {
                         <Text style={{fontSize:20, color:"#000",marginBottom:20,  textAlign:"center"}}> 36.1°C - 37.2°C.  </Text>
                         <Text style={{fontSize:20, color:"#000", textAlign:"center" }}>If you feel any of </Text>
                         <Text style={{fontSize:20, color:"#000", textAlign:"center", marginBottom:20}}>these common symptoms </Text>
-                        <ImageSlider
-                           // loop
+                        <Carousel
 
-                            autoPlayWithInterval={3000}
-                            images={images}
-                            style={{flex:0, backgroundColor:"transparent",width:250, height:300}}
-                            customSlide={({ index, item}) => (
-
-                                    <Image key={index} source={item.source} style={{ flex:1, width:300, justifyContent:"center"}} />
-
-                            )}
-                        />
-                        <Text style={{fontSize:20, color:"#000", textAlign:"center", marginTop:20 }}>contact your doctor! </Text>
+                            style={{width:200}}
+                            hideIndicators={true}
+                            animate={true}
+                            loop={true}
+                        >
+                            <View style={{width:"50%"}}>
+                                <Image source={images[0].source} style={{resizeMode:'contain', width:200, maxHeight:300}} />
+                            </View>
+                            <View style={{width:"50%"}}>
+                                <Image source={images[1].source} style={{resizeMode:'contain',width:200, maxHeight:300}}/>
+                            </View>
+                            <View style={{width:"50%"}}>
+                                <Image source={images[2].source} style={{resizeMode:'contain', width:200, maxHeight:300}} />
+                            </View>
+                            <View style={{width:"50%"}}>
+                                <Image source={images[3].source} style={{resizeMode:'contain', width:200, maxHeight:300}}/>
+                            </View>
+                            <View style={{width:"50%"}}>
+                                <Image source={images[4].source}  style={{resizeMode:'contain', width:200, maxHeight:300}}/>
+                            </View>
+                            <View style={{width:"50%"}}>
+                                <Image source={images[5].source}  style={{resizeMode:'contain', width:200, maxHeight:300}} />
+                            </View>
+                            <View style={{width:"50%"}}>
+                                <Image source={images[6].source}  style={{resizeMode:'contain', width:200, maxHeight:300}}/>
+                            </View>
+                            <View style={{width:"50%"}}>
+                                <Image source={images[7].source}  style={{resizeMode:'contain', width:200, maxHeight:300}} />
+                            </View>
+                        </Carousel>
+                        <Text style={{fontSize:20, color:"#000", textAlign:"center", }}>contact your doctor! </Text>
                     </View>
                     <View style={styles.thermometerContainer}>
                         <ImageBackground
