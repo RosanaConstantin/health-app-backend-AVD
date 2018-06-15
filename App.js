@@ -33,7 +33,7 @@ function applicationInitialize() {
 
         componentDidMount() {
             Keyboard.dismiss();
-            Actions.temperature();
+            Actions.sleep();
         }
 
         render() {

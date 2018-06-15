@@ -3,6 +3,7 @@ package com.healthapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.brentvatne.react.ReactVideoPackage;
 import com.rnfs.RNFSPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -34,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
             new ImageResizerPackage(),
             new ImagePickerPackage(),
             new RCTBluetoothSerialPackage(),
+             new ReactVideoPackage(),
             new RCTToastPackage(),
             new BleManagerPackage(),
             new MapsPackage()
