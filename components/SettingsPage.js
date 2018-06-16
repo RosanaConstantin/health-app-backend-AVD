@@ -67,7 +67,7 @@ export default class SettingsPage extends React.Component {
           .then((response) => response.json())
           .then((response) => {
               if (response.error) {
-                  alert(response.error + ' Error while gettig user profile!');
+                  alert(response.error + ' Error while updating notifications abonnement!');
               } else {
                   if(this.state.pushNotifications){
                       alert('Successfully subscribed on notifications');

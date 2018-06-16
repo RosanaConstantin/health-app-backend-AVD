@@ -120,7 +120,9 @@ export default class FormInsideSign extends React.Component {
                                 location: userProfile.profile.city || 'Londra',
                                 notifications: userProfile.profile.notifications,
                                   steps: userProfile.profile.stepsGoal || 0,
-                                  weight: userProfile.profile.weight || 53
+                                  weight: userProfile.profile.weight || 53,
+                                  superviser: userProfile.profile.superviser,
+                                  superviserPhone: userProfile.profile.superviserPhone
                               };
                               global.notifications =[];
                               global.bagde = 0;
