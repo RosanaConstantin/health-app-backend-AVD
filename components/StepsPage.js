@@ -164,10 +164,10 @@ export default class StepsPage extends React.Component {
                         <Image style={{width:50, height:50}} source={require('../assets/pedometer.png')}/>
                         <Text style={{ fontSize: 18 }}>{this.state.actualSteps + ' steps'}</Text>
                     </ProgressCircle>
-                    <Text style={{ fontSize: 25, marginTop:15, marginLeft:50 }}>{this.state.steps + ' steps'}</Text>
+                    <Text style={{ fontSize: 25, marginTop:15, marginLeft:50 }}>{this.state.steps + ' pași'}</Text>
                 </View>
                 <View>
-                    <Text style={styles.textSet}>Change it only if you want more!</Text>
+                    <Text style={styles.textSet}>Schimbă-l doar dacă vrei mai mult!</Text>
                 </View>
                 <View style={styles.stepsSet}>
                     <TextInput /* placeholder={this.state.steps.toString()}*/
@@ -183,32 +183,32 @@ export default class StepsPage extends React.Component {
                         style={styles.button}
                         onPress={this.handleChanges}
                     >
-                        <Text style={styles.buttonSet}>Go for more!</Text>
+                        <Text style={styles.buttonSet}>Tinde către mai mult!</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.statistics} >
                     <View style={styles.info}>
-                        <Text style={styles.statisticsTitle}>Calories</Text>
+                        <Text style={styles.statisticsTitle}>Calorii</Text>
                         <Image
                             style={{width:40, height:40, alignSelf:"center"}}
                             source={require('../assets/calories.png')}/>
                             <Text style={[styles.statisticsText, {marginTop:10}]}>{( 300 * this.state.actualSteps / 10000).toPrecision(2)}</Text>
 
-                        <Text style={[styles.details, {marginTop:30}]}>*For an average of 2200 steps/mile</Text>
+                        <Text style={[styles.details, {marginTop:30}]}>*Pentru o medie de 2200 pași/milă</Text>
                     </View>
                     <View style={styles.info}>
-                        <Text style={[styles.statisticsTitle, {marginBottom:10}]}>Distance</Text>
+                        <Text style={[styles.statisticsTitle, {marginBottom:10}]}>Distanță</Text>
                         <Image
                             style={{width:50, height:50, alignSelf:"center"}}
                             source={require('../assets/distance.png')}/>
                             <Text style={[styles.statisticsText , {marginTop:6}]}>{(0.57*this.state.weight/2200).toPrecision(2) * this.state.actualSteps}</Text>
-                        <Text style={[styles.details, {marginTop:31}]}>*For an average of 2200 steps/mile</Text>
+                        <Text style={[styles.details, {marginTop:31}]}>*Pentru o medie de 2200 pași/milă</Text>
                     </View>
                 </View>
 
                 <View >
-                    <Text style={styles.details}> The American Heart Association recommends that adults walk 10,000 steps each day.</Text>
+                    <Text style={styles.details}> Asociația American Heart recomandă unui adult cel puțin 10,000 de pași zilnic!</Text>
                 </View>
             </View>
         );

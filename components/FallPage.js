@@ -203,7 +203,7 @@ export default class FallPage extends React.Component {
         return(
         <KeyboardAvoidingView style={styles.container} behavior="padding">
             <View style={styles.containerTitle}>
-                <Text style={styles.title}> Fall detection</Text>
+                <Text style={styles.title}> Detecția căderii</Text>
             </View>
             <View style={styles.containerSwitch}>
                 <MaterialCommunityIcons
@@ -211,7 +211,7 @@ export default class FallPage extends React.Component {
                     size={30}
                     color={"#ff000e"}
                     />
-                <Text style={styles.textSwitch}> Advice: Choose to be supervised!</Text>
+                <Text style={styles.textSwitch}> Sfat: Alege să fii supravegheat!</Text>
                 <Switch
                     style={styles.switch}
                     onValueChange={this.toogleSuperviser.bind(this)}
@@ -224,7 +224,7 @@ export default class FallPage extends React.Component {
                             style ={styles.phone}
                             onPress={()=>{this.activate()}}
                         >
-                            <Text style={styles.textSuperviser}>Change your superviser phone!</Text>
+                            <Text style={styles.textSuperviser}>Schimbă numărul de telefon al supraveghetorului tău!</Text>
                         </TouchableOpacity>
                         {this.state.superviserPhone ? (
                             this.state.changePhone ?(
@@ -239,7 +239,7 @@ export default class FallPage extends React.Component {
                                         style ={styles.save}
                                         onPress={()=>{this.updateSuperviser(this.phone)}}
                                     >
-                                        <Text style={styles.textSave}>Save your superviser phone!</Text>
+                                        <Text style={styles.textSave}>Salvează!</Text>
                                     </TouchableOpacity>
                                 </View>
                             ) : (
@@ -247,16 +247,16 @@ export default class FallPage extends React.Component {
                             )
                         ) : (
                             <View>
-                                <Text style={styles.adviceText}> You don't have a saved superviser phone!</Text>
+                                <Text style={styles.adviceText}>Nu ai salvat niciun număr de telefon pentru supraveghetor!</Text>
                             </View>
                             )}
                     </View>
                     ) : (
                         <View style={styles.advice}>
-                            <Text style={styles.adviceText}>Don't you have a superviser?</Text>
-                            <Text style={styles.adviceText}>Go for one now!</Text>
+                            <Text style={styles.adviceText}>Nu ai un supraveghetor încă?</Text>
+                            <Text style={styles.adviceText}>Ia-ți unul!</Text>
                             <Text style={styles.adviceText}>
-                                If you're in a critical situation, he can save you!</Text>
+                                Dacă te afli într-o situație critică, te poate salva!</Text>
                         </View>
                 )}
             </View>
@@ -267,14 +267,14 @@ export default class FallPage extends React.Component {
                             style={styles.alarmImage}
                             source={require('../assets/fallD.png')}
                         />
-                        <Text  style={styles.alarmText}>A fall was detected!</Text>
+                        <Text  style={styles.alarmText}>A fost detectată o cădere!</Text>
                         <View style={styles.alarmContainer}>
                             <Entypo
                                 name="message"
                                 size={50}
                                 color={"#ff000e"}
                             />
-                            <Text style={styles.messageText}>The alarm message is sent to {this.state.superviserPhone}</Text>
+                            <Text style={styles.messageText}>Mesajul de alarmă va fi trimis către {this.state.superviserPhone}</Text>
                         </View>
                     </View>
                     ) : (
@@ -283,7 +283,7 @@ export default class FallPage extends React.Component {
                             style={styles.safeImage}
                             source={require('../assets/safe.png')}
                         />
-                        <Text  style={styles.safeText}>Maintain the right position! Trust in you!</Text>
+                        <Text  style={styles.safeText}>Păstrează poziția dreaptă! Ai încredere în tine!</Text>
                     </View>
                 )}
             </View>

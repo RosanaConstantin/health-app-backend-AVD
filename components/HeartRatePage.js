@@ -76,11 +76,11 @@ export default class HeartRatePage extends React.Component {
         return (
             <View style={styles.container}>
                 <View>
-                    <Text style={styles.title}>Take care of your care!</Text>
+                    <Text style={styles.title}>Ai grijă de inima ta!</Text>
                 </View>
 
                 <View style={styles.containerDetails}>
-                    <Text style={styles.indicate}>Heart rate</Text>
+                    <Text style={styles.indicate}>Bătăile inimii</Text>
                     <View style={styles.bpm}>
                         <Image
                             style={styles.image}
@@ -103,7 +103,7 @@ export default class HeartRatePage extends React.Component {
                             alignSelf: "center"
                         }}
                     />
-                    <Text  style={styles.indicate}>Oxygen saturation</Text>
+                    <Text  style={styles.indicate}>Saturația oxigenului</Text>
                     <View style={styles.bpm}>
 
                         <Image

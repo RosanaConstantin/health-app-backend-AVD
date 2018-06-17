@@ -69,7 +69,7 @@ export default class Rate extends React.Component {
               style={styles.homeButton}
               overlay="transparent"
                 onPress={() => {Actions.dashboard();this.setModalVisible(!this.state.modalVisible); this.saveRatingNumber();}}>
-                <Text style={styles.homeButtonText}>Send and go back to Home</Text>
+                <Text style={styles.homeButtonText}>Trimite evaluarea ta și întoarce-te acasă!</Text>
               </TouchableHighlight>
       </Overlay>
         );

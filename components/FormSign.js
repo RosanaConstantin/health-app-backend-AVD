@@ -179,7 +179,7 @@ export default class FormInsideSign extends React.Component {
                           onChange={this._onChange}
                       />
                       <TouchableHighlight underlayColor="transparent" onPress={this._handleAdd}>
-                          <Text style={[styles.button, styles.greenButton]} >Sign in</Text>
+                          <Text style={[styles.button, styles.greenButton]} >Loghează-te!</Text>
                       </TouchableHighlight>
 
              </ScrollView>

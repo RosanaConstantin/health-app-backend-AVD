@@ -73,16 +73,16 @@ export default class NotificationPage extends React.Component {
             !global.user.notifications ? (
                 <View>
                     <Text style={styles.warningText}>
-                        You must be enrolled in notifications. Go to settings!!</Text>
+                        Trebuie să ai activat serviciul de notificări! Du-te la Setări!</Text>
                 </View>
             ) : (
                     this.state.notifications.length === 0 ? (
                         <View>
-                            <Text style={styles.warningText}>You don't have notifications!</Text>
+                            <Text style={styles.warningText}>Nu ai notificări!</Text>
                         </View>
                     ) : (
                         <View style={styles.container}>
-                            <Text style={styles.title}>Your notifications</Text>
+                            <Text style={styles.title}>Notificările tale</Text>
                             <ScrollView style={styles.containerScroll}>
                                 {this.state.notifications.map((notif, index) => {
                                     return (

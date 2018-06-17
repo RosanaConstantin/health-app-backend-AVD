@@ -90,21 +90,21 @@ export default class HomePage extends React.Component {
                     name='md-bluetooth'
                     size={24}
                     style={{ marginLeft:40, marginRight:20}}/>
-                <Text>Make sure that yout bluetooth is connected!</Text>
+                <Text>Fii sigur că bluetooth tău este activat!</Text>
             </View>
             <View style={{justifyContent:'center'}}>
                 <TouchableOpacity
                     style={{width:220, height:40, backgroundColor:"#fff", alignSelf:"center", justifyContent:'center', borderRadius:20}}
                    onPress={this.connectToWatch}
                 >
-                    <Text style={{textAlign:'center'}}>Connect to your smart watch!</Text>
+                    <Text style={{textAlign:'center'}}>Conectează-te la dispozitiv!</Text>
                 </TouchableOpacity>
             </View>
 
             <Image style={styles.imageHeader}
             source={require('../assets/homeHeader.png')}/>
 
-            <Text style={styles.text}>Make your life better!</Text>
+            <Text style={styles.text}>Fă-ți viața mai bună!</Text>
             <View style={styles.bigWrapper}>
                 <View style={styles.firstRow}>
                     <View style={styles.button}>
@@ -118,7 +118,7 @@ export default class HomePage extends React.Component {
                                     style={styles.image}
                                     source={require('../assets/sleep.png')}
                                 />
-                                <Text style={styles.buttonText}> Sleep </Text>
+                                <Text style={styles.buttonText}> Somn </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -134,7 +134,7 @@ export default class HomePage extends React.Component {
                                     style={styles.image}
                                     source={require('../assets/steps.png')}
                                 />
-                                <Text style={styles.buttonText}> Steps </Text>
+                                <Text style={styles.buttonText}> Pași </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -150,7 +150,7 @@ export default class HomePage extends React.Component {
                                     style={styles.image}
                                     source={require('../assets/heartRate.png')}
                                 />
-                                <Text style={styles.buttonText}> Heart Rate </Text>
+                                <Text style={styles.buttonText}>  Bătăile inimii </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -165,7 +165,7 @@ export default class HomePage extends React.Component {
                                     style={styles.image}
                                     source={require('../assets/location.png')}
                                 />
-                                <Text style={styles.buttonText}> Location </Text>
+                                <Text style={styles.buttonText}> Localizare </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -183,7 +183,7 @@ export default class HomePage extends React.Component {
                                     style={styles.image}
                                     source={require('../assets/temperature.png')}
                                 />
-                                <Text style={styles.buttonText}> Body temperature </Text>
+                                <Text style={styles.buttonText}> Temperatură </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -199,7 +199,7 @@ export default class HomePage extends React.Component {
                                     style={styles.image}
                                     source={require('../assets/fall.png')}
                                 />
-                                <Text style={styles.buttonText}> Fall detection </Text>
+                                <Text style={styles.buttonText}> Detecția căderii </Text>
                             </View>
                         </TouchableOpacity>
                     </View>

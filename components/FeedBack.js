@@ -71,7 +71,7 @@ export default class FeedBack extends React.Component {
                     overlay="transparent"
                     style={styles.homeButton}
                     onPress={() => { Actions.dashboard(); this.setModalVisible(!this.state.modalVisible); this.saveFeedback();}}>
-                    <Text style={styles.homeButtonText}>Send feedback and go back to Home</Text>
+                    <Text style={styles.homeButtonText}>Trimite feedback și întoarce-te acasă!</Text>
                 </TouchableHighlight>
             </Overlay>
         );

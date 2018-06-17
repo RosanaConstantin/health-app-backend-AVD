@@ -67,11 +67,11 @@ export default class ActivityPage extends React.Component {
             ) : (
             this.state.activities.length === 0 ? (
                 <View>
-                    <Text style={styles.warningText}>You don't have activities!</Text>
+                    <Text style={styles.warningText}>Încă nu ai activități!</Text>
                 </View>
             ) : (
                 <View style={styles.container}>
-                    <Text style={styles.title}>Your last activities</Text>
+                    <Text style={styles.title}>Ultimele activități</Text>
                     <ScrollView style={styles.containerScroll}>
                         {this.state.activities.map((activity, index) => {
                             return (

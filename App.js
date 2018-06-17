@@ -33,7 +33,7 @@ function applicationInitialize() {
 
         componentDidMount() {
             Keyboard.dismiss();
-            Actions.home();
+            Actions.intro();
         }
 
         render() {

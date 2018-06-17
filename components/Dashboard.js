@@ -44,29 +44,29 @@ export default class Dashboard extends React.Component {
             {
               page: "ProfileScreen",
               icon: "person",
-              iconText: "Profile"
+              iconText: "Profil"
             },
             {
               page: "NotificationScreen",
               icon: "notifications",
                 badgeNumber: global.user.notifications ? global.badge : 0,
-              iconText: "Notification"
+              iconText: "Notificări"
             },
              
             {
               page: "HomeScreen",
               icon: "home",
-              iconText: "Home"
+              iconText: "Acasă"
             },
             {
               page: "ActivityScreen",
               icon: "pulse",
-              iconText: "Activity"
+              iconText: "Activități"
             },
             {
               page: "SettingsScreen",
               icon: "md-settings",
-              iconText: "Settings"
+              iconText: "Setări"
             }
           ]}
         />

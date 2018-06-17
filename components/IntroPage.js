@@ -40,14 +40,14 @@ const slides = [
   {
     key: 'somethun1',
     title: 'Health App',
-    text: 'Get your Health App for health monitoring!',
+    text: 'Folosește HealthApp pentru a-ți monitoriza sănătatea!',
     image: require('../assets/fitness-health-screen-dbruggisser.jpg'),
     imageStyle: styles.image,
     backgroundColor: '#7E7D79',
   },
   {
     key: 'somethun-dos',
-    title: 'Do not forget about sport!',
+    title: 'Nu uita de sport!',
     text: 'Get healthier each day!',
     image: require('../assets/man.jpg'),
     imageStyle: styles.image,
@@ -56,7 +56,7 @@ const slides = [
   {
     key: 'somethun',
     title: 'Reach daily goals!',
-    text: 'Don\'t limit your challenges. \n Challenge your limits!',
+    text: 'Nu îțî limita provocările!  \nProvoacă-ți limitele!',
     image: require('../assets/goals.jpg'),
     imageStyle: styles.image,
     backgroundColor: '#3FB0B6',

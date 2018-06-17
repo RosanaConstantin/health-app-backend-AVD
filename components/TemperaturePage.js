@@ -26,11 +26,11 @@ export default class TemperaturePage extends React.Component {
     componentWillMount(){
         this.setState({temperature: global.temperature})
         if(global.temperature > 36.1 && global.temperature < 37.2){
-            this.setState({state: 'NORMAL TEMPERATURE'});
+            this.setState({state: 'TEMPERATURĂ NORMALĂ'});
         } else if (global.temperature < 36.1){
-            this.setState({state: 'LOWER TEMPERATURE'});
+            this.setState({state: 'TEMPERATURĂ SCĂZUTĂ'});
         } else {
-            this.setState({state: 'HIGHER TEMPERATURE'});
+            this.setState({state: 'TEMPERATURĂ RIDICATĂ'});
         }
     }
 
@@ -57,10 +57,10 @@ export default class TemperaturePage extends React.Component {
                 <View style={{flexDirection:"row"}}>
                     <View style={{width:"60%", marginLeft:15}}>
 
-                        <Text style={{fontSize:20, color:"#000",marginTop:20,  textAlign:"center"}}> Normal limits   </Text>
+                        <Text style={{fontSize:20, color:"#000",marginTop:20,  textAlign:"center"}}> Limite normale   </Text>
                         <Text style={{fontSize:20, color:"#000",marginBottom:20,  textAlign:"center"}}> 36.1°C - 37.2°C.  </Text>
-                        <Text style={{fontSize:20, color:"#000", textAlign:"center" }}>If you feel any of </Text>
-                        <Text style={{fontSize:20, color:"#000", textAlign:"center", marginBottom:20}}>these common symptoms </Text>
+                        <Text style={{fontSize:20, color:"#000", textAlign:"center" }}>Dacă simți unul dintre</Text>
+                        <Text style={{fontSize:20, color:"#000", textAlign:"center", marginBottom:20}}>următoarele simptome </Text>
                         <Carousel
 
                             style={{width:200}}
@@ -93,7 +93,7 @@ export default class TemperaturePage extends React.Component {
                                 <Image source={images[7].source}  style={{resizeMode:'contain', width:200, maxHeight:300}} />
                             </View>
                         </Carousel>
-                        <Text style={{fontSize:20, color:"#000", textAlign:"center", }}>contact your doctor! </Text>
+                        <Text style={{fontSize:20, color:"#000", textAlign:"center", }}>contactează-ți doctorul!</Text>
                     </View>
                     <View style={styles.thermometerContainer}>
                         <ImageBackground

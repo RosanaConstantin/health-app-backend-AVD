@@ -34,15 +34,15 @@ export default class TermsPolicies extends React.Component {
             childrenWrapperStyle={{backgroundColor: '#eee'}}
             animationDuration={500}>
           <Text>
-          Terms of use agreement
 
-This Terms of Use Agreement (this “Agreement”) is entered into by and between iMedicalApps LLC (the “Author”) and “you,” the user of this web blog, also known as the “iMedicalApps (the “Site”). Access to, use of and/or browsing of the Site is provided subject to the terms and conditions set forth herein. By accessing, using and/or browsing the Site, you hereby agree to these terms and conditions.
-          </Text>
+              Termenii și condițiile de utilizare
+
+              Acest Acord de Termeni și Utilizare (acest "Contract") este încheiat de către HealthApp ("Autorul") și "Dumneavoastră", utilizatorul acestei aplicații, cunoscut și ca "HealthApp" ("Site"). Accesul la, utilizarea și / sau navigarea Site-ului este furnizat în condițiile și termenii stabiliți aici. Prin accesarea, utilizarea și / sau navigarea pe site, sunteți de acord cu acești termeni și condiții </Text>
           <TouchableHighlight
               overlay="transparent"
                   style={styles.homeButton}
                     onPress={() => {Actions.dashboard();this.setModalVisible(!this.state.modalVisible); }}>
-                    <Text style={styles.homeButtonText}>Back to Home</Text>
+                    <Text style={styles.homeButtonText}>Acasă</Text>
                   </TouchableHighlight>
       </Overlay>
         );

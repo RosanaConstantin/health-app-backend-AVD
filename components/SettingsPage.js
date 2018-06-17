@@ -180,7 +180,7 @@ export default class SettingsPage extends React.Component {
               </Text>
             </View>
               <View>
-                  <Text style={styles.logOut}>Log out</Text>
+                  <Text style={styles.logOut}>Delogare</Text>
                   <Entypo
                       size={30}
                      name="log-out"
@@ -189,10 +189,10 @@ export default class SettingsPage extends React.Component {
               </View>
           </View>
           <ScrollView style={styles.scroll}>
-          <InfoText text="Account" />
+          <InfoText text="Cont" />
             <ListItem
-                title="Profile settings"
-                rightTitle={'Profile'}
+                title="Setările de profil"
+                rightTitle={'Profil'}
                 onPress={() => this.changeProfile()}
                 containerStyle={styles.listItemContainer}
                 leftIcon={
@@ -204,8 +204,8 @@ export default class SettingsPage extends React.Component {
                 }
             />
             <ListItem
-                title="Credentials settings"
-                rightTitle={'Profile'}
+                title="Setările de cont"
+                rightTitle={'Profil'}
                 onPress={() => this.changeUserCredentials()}
                 containerStyle={styles.listItemContainer}
                 leftIcon={
@@ -221,7 +221,7 @@ export default class SettingsPage extends React.Component {
             <ListItem
               switchButton
               hideChevron
-              title="Push notifications"
+              title="Serviciul de notificări"
               switched={this.state.pushNotifications}
               onSwitch={this.onChangePushNotifications}
               containerStyle={styles.listItemContainer}
@@ -236,7 +236,7 @@ export default class SettingsPage extends React.Component {
               }
             />
             <ListItem
-              title="Location"
+              title="Locație"
               rightTitle={global.user.location}
               onPress={() => this.showLocationMessage()}
               containerStyle={styles.listItemContainer}
@@ -249,7 +249,7 @@ export default class SettingsPage extends React.Component {
               }
             />
             <ListItem
-              title="Language"
+              title="Limbă"
               rightTitle={global.user.language}
               onPress={() => this.showLanguageMessage()}
               containerStyle={styles.listItemContainer}
@@ -262,7 +262,7 @@ export default class SettingsPage extends React.Component {
               }
             />
               <ListItem
-                  title="Destroy your user"
+                  title="Șterge utilizatorul curent"
                   rightTitle={'User'}
                   onPress={() => this.destoyUser()}
                   containerStyle={styles.listItemContainer}
@@ -275,10 +275,10 @@ export default class SettingsPage extends React.Component {
                   }
               />
           </List>
-          <InfoText text="More" />
+          <InfoText text="Mai mult" />
           <List containerStyle={styles.listContainer}>
             <ListItem
-              title="About us"
+              title="Despre noi"
               onPress={() => Actions.about()}
               containerStyle={styles.listItemContainer}
               leftIcon={
@@ -290,7 +290,7 @@ export default class SettingsPage extends React.Component {
               }
             />
             <ListItem
-              title="Terms and Policies"
+              title="Termeni și politici"
               onPress={() => Actions.terms()}
               containerStyle={styles.listItemContainer}
               leftIcon={
@@ -302,7 +302,7 @@ export default class SettingsPage extends React.Component {
               }
             />
             <ListItem
-              title="Rate us"
+              title="Evalueaza-ne"
               onPress={() => Actions.rate()}
               containerStyle={styles.listItemContainer}
               leftIcon={
@@ -317,7 +317,7 @@ export default class SettingsPage extends React.Component {
               }
             />
             <ListItem
-              title="Send feedback"
+              title="Trimite-ne mesajul tău"
               onPress={() => Actions.feedback()}
               containerStyle={styles.listItemContainer}
               leftIcon={

@@ -108,11 +108,11 @@ export default class SleepPage extends React.Component {
                          color={"#fff"}
                          style={{marginTop:30, marginLeft:30, marginRight:20}}
                      />
-                     <Text style={{textAlign:"center", color:"#fff", fontSize:35 , marginTop:20, marginBottom:20}}>Improve your sleep!</Text>
+                     <Text style={{textAlign:"center", color:"#fff", fontSize:35 , marginTop:20, marginBottom:20}}>Îmbunătățește-ți somnul!</Text>
                  </View>
                     <View>
                         <TouchableOpacity style={{width:"98%", height:80,  backgroundColor: '#38446C', alignSelf:"center", borderRadius:15}}>
-                            <Text style={{fontSize:20, textAlign:"center", color:"#fff"}}>Set your bed time goal for today!</Text>
+                            <Text style={{fontSize:20, textAlign:"center", color:"#fff"}}>Setează-ți ura de culcare pentru astăzi!</Text>
                             <TimePicker
                                 selectedHours={selectedHours}
                                 style={{height:70}}
@@ -155,8 +155,8 @@ export default class SleepPage extends React.Component {
                             />
                         </TouchableOpacity>
                     </View>
-                     <Text style={styles.text}>You have just {diffHours}h and {diffMinutes}' until you must be in bed!</Text>
-                    <Text style={{fontSize:20, color:"#fff",textAlign:"center", marginTop:20}}>For a better sleep, try to keep: </Text>
+                     <Text style={styles.text}>Mai ai doar {diffHours}h și {diffMinutes}' până trebuie să te duci în pat!</Text>
+                    <Text style={{fontSize:20, color:"#fff",textAlign:"center", marginTop:20}}>Pentru un somn odihnitor, respectă urmatoarele sfaturi! </Text>
                  <View style={{flexDirection:"row", margin:40, marginTop:20}}>
                      <View style={{flexDirection:"column"}}>
                          <View style={{width:150, height:150, marginBottom:10, backgroundColor: '#38446C', borderRadius:15}}>
@@ -166,7 +166,7 @@ export default class SleepPage extends React.Component {
                                  color="#fff"
                                  style={{alignSelf:"center"}}
                              />
-                             <Text style={{color:"#fff", fontSize:15, marginTop:10, textAlign:"center"}}>Stops the light sources in the room. Use curtains to stop the morning light!</Text>
+                             <Text style={{color:"#fff", fontSize:15, marginTop:10, textAlign:"center"}}>Oprește sursele de lumină din cameră. Folosește draperii!</Text>
                          </View>
                          <View style={{width:150, height:150, backgroundColor: '#38446C', borderRadius:15}}>
                              <MaterialCommunityIcons
@@ -175,7 +175,7 @@ export default class SleepPage extends React.Component {
                                  color="#fff"
                                  style={{alignSelf:"center"}}
                              />
-                             <Text style={{color:"#fff", fontSize:15, marginTop:10, textAlign:"center"}}>Keep a moderate temperature in the sleeping room!</Text>
+                             <Text style={{color:"#fff", fontSize:15, marginTop:10, textAlign:"center"}}>Păstrează o temperatură moderată a camerei!</Text>
                          </View>
                      </View>
                      <View style={{flexDirection:"column", marginLeft:40}}>
@@ -186,7 +186,7 @@ export default class SleepPage extends React.Component {
                                  color="#fff"
                                  style={{alignSelf:"center"}}
                              />
-                             <Text style={{color:"#fff", fontSize:15, marginTop:10, textAlign:"center"}}>Try to fall asleep at the right time and sleep for at least 8h!</Text>
+                             <Text style={{color:"#fff", fontSize:15, marginTop:10, textAlign:"center"}}>Încearcă să adormi la ore potrivite și să dormi cel puțin 8h!</Text>
                          </View>
                          <View style={{width:150, height:150, backgroundColor: '#38446C', borderRadius:15}}>
                              <MaterialCommunityIcons
@@ -195,7 +195,7 @@ export default class SleepPage extends React.Component {
                                  color="#fff"
                                  style={{alignSelf:"center"}}
                              />
-                             <Text style={{color:"#fff", fontSize:15, marginTop:10, textAlign:"center"}}>Buy a comfortable mattress!</Text>
+                             <Text style={{color:"#fff", fontSize:15, marginTop:10, textAlign:"center"}}>Cumpără-ți o saltea confortabilă!</Text>
 
                          </View>
                      </View>

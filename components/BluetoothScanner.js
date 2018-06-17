@@ -272,7 +272,7 @@ class BluetoothScanner extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <View style={styles.topBar}>
-                    <Text style={styles.heading}>Bluetooth Connection </Text>
+                    <Text style={styles.heading}>Conexiunea Bluetooth </Text>
                     {Platform.OS === 'android'
                         ? (
                             <View style={styles.enableInfoWrapper}>
@@ -290,10 +290,10 @@ class BluetoothScanner extends Component {
                     ? (
                         <View style={[styles.topBar, { justifyContent: 'center', paddingHorizontal: 0 }]}>
                             <TouchableOpacity style={[styles.tab, this.state.section === 0 && activeTabStyle]} onPress={() => this.setState({ section: 0 })}>
-                                <Text style={{ fontSize: 14, color: '#FFFFFF' }}>PAIRED DEVICES</Text>
+                                <Text style={{ fontSize: 14, color: '#FFFFFF' }}>Dispozitive asociate</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={[styles.tab, this.state.section === 1 && activeTabStyle]} onPress={() => this.setState({ section: 1 })}>
-                                <Text style={{ fontSize: 14, color: '#FFFFFF' }}>UNPAIRED DEVICES</Text>
+                                <Text style={{ fontSize: 14, color: '#FFFFFF' }}>Dispozitive neasociate</Text>
                             </TouchableOpacity>
                         </View>
                     ) : null}
