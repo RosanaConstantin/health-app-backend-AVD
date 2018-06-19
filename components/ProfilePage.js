@@ -162,7 +162,7 @@ export default class ProfilePage extends React.Component {
   renderGender = () => {
       return (
           <Card style={styles.gender}>
-              <TextInput editable={false}> {'Gender: ' + global.user.gender} </TextInput>
+              <TextInput editable={false}> {'Sex - ' + global.user.gender} </TextInput>
           </Card>
       );
   }
@@ -174,7 +174,7 @@ export default class ProfilePage extends React.Component {
               style={{width: 280}}
               date={this.state.date}
               mode="date"
-              placeholder="Birthdate"
+              placeholder="Zi de naștere"
               maxDate="2016-06-01"
               format="YYYY-MM-DD"
               customStyles={{

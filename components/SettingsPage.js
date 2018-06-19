@@ -67,12 +67,12 @@ export default class SettingsPage extends React.Component {
           .then((response) => response.json())
           .then((response) => {
               if (response.error) {
-                  alert(response.error + ' Error while updating notifications abonnement!');
+                  alert(response.error + ' Eroare în timpul apelării serviciului de notificări');
               } else {
                   if(this.state.pushNotifications){
-                      alert('Successfully subscribed on notifications');
+                      alert('Abonat cu succes la notificări');
                   } else {
-                      alert('Successfully unsubscribed on notifications');
+                      alert('Dezabonat cu succes la notificări');
                   }
               }
           })
@@ -263,7 +263,7 @@ export default class SettingsPage extends React.Component {
             />
               <ListItem
                   title="Șterge utilizatorul curent"
-                  rightTitle={'User'}
+                  rightTitle={'Utilizator'}
                   onPress={() => this.destoyUser()}
                   containerStyle={styles.listItemContainer}
                   leftIcon={

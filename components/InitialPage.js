@@ -16,7 +16,7 @@ import * as Animatable from 'react-native-animatable';
               </Animatable.Text>
       
               <Text style={styles.paragraph}>
-                Fii în legătură cu sănătatea ta
+                Fii în contact cu sănătatea ta
               </Text>
       
               <Image
@@ -24,15 +24,15 @@ import * as Animatable from 'react-native-animatable';
                 style={{ height: 140, width: 410 }}
               />
       
-              <View style={{ marginTop: 50, height: 50, width: 100 }} >
+              <View style={{ marginTop: 50, height: 50, width: 200 }} >
                 <Button style={styles.singIn}
-                  title="Logheaza-te"
+                  title="Loghează-te"
                   color="#292D36"
                   onPress={() => Actions.signIn()}
                 />
               </View>
       
-              <View style={{ marginTop: 20, width: 100 }} >
+              <View style={{ marginTop: 20, width: 200 }} >
                 <Button style={styles.joinIn}
                   title="Înregistrează-te"
                   color="#292D36"

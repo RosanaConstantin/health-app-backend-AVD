@@ -57,7 +57,7 @@ export default class TemperaturePage extends React.Component {
                 <View style={{flexDirection:"row"}}>
                     <View style={{width:"60%", marginLeft:15}}>
 
-                        <Text style={{fontSize:20, color:"#000",marginTop:20,  textAlign:"center"}}> Limite normale   </Text>
+                        <Text style={{fontSize:20, color:"#000",marginTop:20,  textAlign:"center"}}> Limitele normale   </Text>
                         <Text style={{fontSize:20, color:"#000",marginBottom:20,  textAlign:"center"}}> 36.1°C - 37.2°C.  </Text>
                         <Text style={{fontSize:20, color:"#000", textAlign:"center" }}>Dacă simți unul dintre</Text>
                         <Text style={{fontSize:20, color:"#000", textAlign:"center", marginBottom:20}}>următoarele simptome </Text>

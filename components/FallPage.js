@@ -41,9 +41,9 @@ const styles = StyleSheet.create({
     phone: {
         alignSelf:"center",
         borderRadius:15,
-        width:250,
-        height:50,
-        marginTop:20,
+        width:300,
+        height:75,
+        marginTop:30,
         backgroundColor:"#85a8ff"
     },
     textSuperviser:{
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         borderRadius:15,
         width:250,
         height:50,
-        marginTop:20,
+        marginTop:30,
         backgroundColor:"#85a8ff"
     },
     textSave: {
@@ -178,12 +178,12 @@ export default class FallPage extends React.Component {
             .then((response) => response.json())
             .then((response) => {
                 if (response.error) {
-                    alert(response.error + ' Error while updating user profile!');
+                    alert(response.error + ' Eroare în momentul extragerii profilului!');
                 } else {
                     if(this.state.superviser){
-                        alert('Successfully subscribed on fall detection');
+                        alert('Înscris cu succes!');
                     } else {
-                        alert('Successfully unsubscribed on fall detection');
+                        alert('Dezabonat cu succes');
                     }
                 }
             })
@@ -254,7 +254,7 @@ export default class FallPage extends React.Component {
                     ) : (
                         <View style={styles.advice}>
                             <Text style={styles.adviceText}>Nu ai un supraveghetor încă?</Text>
-                            <Text style={styles.adviceText}>Ia-ți unul!</Text>
+                            <Text style={styles.adviceText}>Găsesște-l!</Text>
                             <Text style={styles.adviceText}>
                                 Dacă te afli într-o situație critică, te poate salva!</Text>
                         </View>

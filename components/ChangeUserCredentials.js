@@ -232,7 +232,7 @@ export default class ChangeUserCredentials extends React.Component {
                     </Card>
 
                     <TouchableHighlight  overlay="transparent" onPress={this.handleChanges}>
-                        <Text style={[styles.button, styles.greenButton]}>Save changes</Text>
+                        <Text style={[styles.button, styles.greenButton]}>Salvează modificările!</Text>
                     </TouchableHighlight>
                 </View>
             </ScrollView>

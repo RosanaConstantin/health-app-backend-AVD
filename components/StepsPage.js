@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor:"#ff9378",
-        width:100,
+        width:200,
         height:40,
         borderRadius:15
     },
@@ -162,7 +162,7 @@ export default class StepsPage extends React.Component {
                         The custom styling which will be applied to the outer circle
                     >
                         <Image style={{width:50, height:50}} source={require('../assets/pedometer.png')}/>
-                        <Text style={{ fontSize: 18 }}>{this.state.actualSteps + ' steps'}</Text>
+                        <Text style={{ fontSize: 18 }}>{this.state.actualSteps + ' pași'}</Text>
                     </ProgressCircle>
                     <Text style={{ fontSize: 25, marginTop:15, marginLeft:50 }}>{this.state.steps + ' pași'}</Text>
                 </View>
@@ -202,7 +202,7 @@ export default class StepsPage extends React.Component {
                         <Image
                             style={{width:50, height:50, alignSelf:"center"}}
                             source={require('../assets/distance.png')}/>
-                            <Text style={[styles.statisticsText , {marginTop:6}]}>{(0.57*this.state.weight/2200).toPrecision(2) * this.state.actualSteps}</Text>
+                            <Text style={[styles.statisticsText , {marginTop:6}]}>{((0.57*this.state.weight/2200) * this.state.actualSteps).toPrecision(2)}</Text>
                         <Text style={[styles.details, {marginTop:31}]}>*Pentru o medie de 2200 pași/milă</Text>
                     </View>
                 </View>

@@ -277,7 +277,7 @@ class BluetoothScanner extends Component {
                         ? (
                             <View style={styles.enableInfoWrapper}>
                                 <Text style={{ fontSize: 12, color: '#FFFFFF' }}>
-                                    {!this.state.isEnabled ? 'disable' : 'enable'}
+                                    {!this.state.isEnabled ? 'indisponibil' : 'disponibil'}
                                 </Text>
                                 <Switch
                                     onValueChange={this.toggleBluetooth.bind(this)}

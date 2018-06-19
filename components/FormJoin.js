@@ -114,9 +114,9 @@ export default class FormInsideJoin extends React.Component {
                 .then((response) => response.json())
                 .then((response) => {
                      if(response.error){
-                         alert(response.error + ' Try again to join in!');
+                         alert(response.error + ' Încearcă din nou să te înregistrezi!');
                      } else {
-                        alert('Your account has been created! Sign in and go to Settings to complete your profile!');
+                        alert('Contul tău a fost creat. Loghează-te și completează-ți profilul de la Setări!');
                         Actions.home();
                      }
                 })
@@ -125,7 +125,7 @@ export default class FormInsideJoin extends React.Component {
                 })
                 .done()
         } else {
-            alert('Please fix the errors listed and try again.')
+            alert('Rezolvă problemele și revino!')
         }
     }
 

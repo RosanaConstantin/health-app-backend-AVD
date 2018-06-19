@@ -106,13 +106,13 @@ export default class SleepPage extends React.Component {
                          name="weather-night"
                          size={24}
                          color={"#fff"}
-                         style={{marginTop:30, marginLeft:30, marginRight:20}}
+                         style={{marginTop:30, marginLeft:15, marginRight:10}}
                      />
-                     <Text style={{textAlign:"center", color:"#fff", fontSize:35 , marginTop:20, marginBottom:20}}>Îmbunătățește-ți somnul!</Text>
+                     <Text style={{textAlign:"center", color:"#fff", fontSize:30 , marginTop:20, marginBottom:20}}>Îmbunătățește-ți somnul!</Text>
                  </View>
                     <View>
                         <TouchableOpacity style={{width:"98%", height:80,  backgroundColor: '#38446C', alignSelf:"center", borderRadius:15}}>
-                            <Text style={{fontSize:20, textAlign:"center", color:"#fff"}}>Setează-ți ura de culcare pentru astăzi!</Text>
+                            <Text style={{fontSize:20, textAlign:"center", color:"#fff"}}>Setează-ți ora de culcare pentru astăzi!</Text>
                             <TimePicker
                                 selectedHours={selectedHours}
                                 style={{height:70}}
@@ -155,8 +155,8 @@ export default class SleepPage extends React.Component {
                             />
                         </TouchableOpacity>
                     </View>
-                     <Text style={styles.text}>Mai ai doar {diffHours}h și {diffMinutes}' până trebuie să te duci în pat!</Text>
-                    <Text style={{fontSize:20, color:"#fff",textAlign:"center", marginTop:20}}>Pentru un somn odihnitor, respectă urmatoarele sfaturi! </Text>
+                     <Text style={styles.text}>Mai ai doar {diffHours}h și {diffMinutes}' până când trebuie să te duci în pat!</Text>
+                    <Text style={{fontSize:20, color:"#fff",textAlign:"center", marginTop:20}}>Pentru un somn odihnitor, respectă următoarele sfaturi! </Text>
                  <View style={{flexDirection:"row", margin:40, marginTop:20}}>
                      <View style={{flexDirection:"column"}}>
                          <View style={{width:150, height:150, marginBottom:10, backgroundColor: '#38446C', borderRadius:15}}>
@@ -205,7 +205,7 @@ export default class SleepPage extends React.Component {
                      <View style={{width:"30%", marginLeft:20}}>
                          <FontAwesome
                              name="bed"
-                             size={30}
+                             size={25}
                              color="#fff"
                          />
                         <Text style={{color:"#fff", fontSize:20}}>{selectedHours}:{selectedMinutes}</Text>

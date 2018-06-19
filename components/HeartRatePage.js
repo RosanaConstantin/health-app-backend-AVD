@@ -68,7 +68,7 @@ export default class HeartRatePage extends React.Component {
         this.state = {
             oxigenSaturation: 20,
             heartRate: 50,
-            lastUpdated: 'a minute ago'
+            lastUpdated: 'în urmă cu un minut'
         }
     }
 
@@ -91,7 +91,7 @@ export default class HeartRatePage extends React.Component {
                                 bmp
                             </Text>
                             <Text style={styles.keysTextSec}>
-                                {"Taken " + this.state.lastUpdated}
+                                {this.state.lastUpdated}
                             </Text>
                         </View>
                     </View>
@@ -115,7 +115,7 @@ export default class HeartRatePage extends React.Component {
                                %
                             </Text>
                             <Text style={styles.keysTextSec}>
-                                {"Taken " + this.state.lastUpdated}
+                                {this.state.lastUpdated}
                             </Text>
                         </View>
                     </View>

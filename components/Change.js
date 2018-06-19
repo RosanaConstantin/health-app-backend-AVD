@@ -129,7 +129,7 @@ export default class Change extends React.Component {
             .then((response) => response.json())
             .then((response) => {
                 if (response.error) {
-                    alert(response.error + ' Error while gettig user profile!');
+                    alert(response.error + ' Eroare la extragerea profilului');
                 } else {
                     Actions.dashboard();
                 }
@@ -250,14 +250,14 @@ export default class Change extends React.Component {
     }
     renderGender = () => {
         const data = [{
-            value: 'Female',
+            value: 'F',
             }, {
-            value: 'Male',
+            value: 'M',
             }];
 
         return (
             <Dropdown
-                label='Gender'
+                label='Sex'
                 value={global.user.gender}
                 data={data}
                 onChangeText={(value) => this.onPressGender(value)}
@@ -385,7 +385,7 @@ export default class Change extends React.Component {
                     </Card>
 
                     <TouchableHighlight  overlay="transparent" onPress={this.handleChanges}>
-                        <Text style={[styles.button, styles.greenButton]}>Save changes</Text>
+                        <Text style={[styles.button, styles.greenButton]}>Salvează modificările!</Text>
                     </TouchableHighlight>
                 </View>
             </ScrollView>

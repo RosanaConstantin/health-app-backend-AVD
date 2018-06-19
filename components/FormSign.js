@@ -22,12 +22,12 @@ const options = {
   fields: {
     username: {
         returnKeyType: 'next',
-        error: 'Without an username how are you going to sign in?'
+        error: 'Fără un username, cum dorești să te identific?'
     },
     password: {
       password: true,
       secureTextEntry: true,
-        error: 'Invalid password'
+        error: 'Parolă invalidă!'
     }
   }
 };
@@ -85,7 +85,7 @@ export default class FormInsideSign extends React.Component {
               .then((response) => response.json())
               .then((response) => {
                    if(response.result === 500){
-                       alert('Invalid username/password');
+                       alert('Parolă și/sua username invalide!');
                        
                   } else {
                     responseJson = JSON.stringify(response);
@@ -102,7 +102,7 @@ export default class FormInsideSign extends React.Component {
                           .then((response) => response.json())
                           .then((response) => {
                             if (response.error) {
-                              alert(response.error + ' Error while getting user profile!');
+                              alert(response.error + ' S-a produs o eroare în momentul accesării profilului! ');
                             } else {
                               userProfile = response.result;
                               global.user = {
@@ -111,13 +111,13 @@ export default class FormInsideSign extends React.Component {
                                   password: userProfile.password,
                                 firstName: userProfile.profile.firstName,
                                 lastName: userProfile.profile.lastName,
-                                gender: userProfile.profile.gender || "not updated",
+                                gender: userProfile.profile.gender || "invalid",
                                 birthdate: userProfile.profile.birthdate && userProfile.profile.birthdate.iso.split('T')[0] || "YYYY-MM-DD",
-                                  phone: userProfile.profile.phoneNumber || 'not updated',
+                                  phone: userProfile.profile.phoneNumber || 'invalid',
                                 avatar: userProfile.profile.photo ? userProfile.profile.photo : images['noImage'],
                                 email: userProfile.email,
-                                language: userProfile.profile.language || ' English',
-                                location: userProfile.profile.city || 'Londra',
+                                language: userProfile.profile.language || ' Română',
+                                location: userProfile.profile.city || 'București',
                                 notifications: userProfile.profile.notifications,
                                   steps: userProfile.profile.stepsGoal || 0,
                                   weight: userProfile.profile.weight || 53,
@@ -138,7 +138,7 @@ export default class FormInsideSign extends React.Component {
                                     .then((response) => response.json())
                                     .then((response) => {
                                         if (response.error) {
-                                            alert(response.error + ' Error while getting user notifications!');
+                                            alert(response.error + ' Eroare în extragerea notificărilor!');
                                         } else {
                                             global.notifications = response.result;
                                             var lenght = response.result.length;
@@ -163,7 +163,7 @@ export default class FormInsideSign extends React.Component {
               })
               .done()
       } else {
-          alert('Please fix the errors listed and try again.')
+          alert('Rezolvă probleme apărute și revino!')
       }
   }
 

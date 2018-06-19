@@ -89,8 +89,8 @@ export default class HomePage extends React.Component {
                    onPress={this.connectBluetooth}
                     name='md-bluetooth'
                     size={24}
-                    style={{ marginLeft:40, marginRight:20}}/>
-                <Text>Fii sigur că bluetooth tău este activat!</Text>
+                    style={{ marginLeft:40, marginRight:40}}/>
+                <Text>Fii sigur că bluetooth-ul tău este activat!</Text>
             </View>
             <View style={{justifyContent:'center'}}>
                 <TouchableOpacity
