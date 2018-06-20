@@ -15,6 +15,11 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.healthapp.service.DataCollectorService;
+import android.content.Context;
+import android.os.Bundle;
+import android.content.Intent;
+import com.facebook.react.HeadlessJsTaskService;
 
 import java.util.Arrays;
 import java.util.List;
