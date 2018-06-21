@@ -65,6 +65,7 @@
 		1A3725FFCBB74BA6B770556D /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D0EE4DA3FA4819953F9FC2 /* libRNFS.a */; };
 		B546B05EB1E04D928B346EBD /* libRNBackgroundTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9B678953764F488A4FCBA8 /* libRNBackgroundTimer.a */; };
 		4598320C6FFA469989CB4608 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A50D519606304789A4E9DBC2 /* libRCTVideo.a */; };
+		BCBB33CFC8694863A5C69A64 /* libRNBackgroundJob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EBB5ECB2EDF4BC881DD226E /* libRNBackgroundJob.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -407,6 +408,8 @@
 		7E9B678953764F488A4FCBA8 /* libRNBackgroundTimer.a */ = {isa = PBXFileReference; name = "libRNBackgroundTimer.a"; path = "libRNBackgroundTimer.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		37E977A866AF41A08E7875F2 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; name = "RCTVideo.xcodeproj"; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		A50D519606304789A4E9DBC2 /* libRCTVideo.a */ = {isa = PBXFileReference; name = "libRCTVideo.a"; path = "libRCTVideo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		A8E8F4575DB0497B9F1701DE /* RNBackgroundJob.xcodeproj */ = {isa = PBXFileReference; name = "RNBackgroundJob.xcodeproj"; path = "../node_modules/react-native-background-job/ios/RNBackgroundJob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		7EBB5ECB2EDF4BC881DD226E /* libRNBackgroundJob.a */ = {isa = PBXFileReference; name = "libRNBackgroundJob.a"; path = "libRNBackgroundJob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -449,6 +452,7 @@
 				1A3725FFCBB74BA6B770556D /* libRNFS.a in Frameworks */,
 				B546B05EB1E04D928B346EBD /* libRNBackgroundTimer.a in Frameworks */,
 				4598320C6FFA469989CB4608 /* libRCTVideo.a in Frameworks */,
+				BCBB33CFC8694863A5C69A64 /* libRNBackgroundJob.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,6 +651,7 @@
 				99C2DC399BB047D0A91F8AF7 /* RNFS.xcodeproj */,
 				FFCB4B3B3C664B56BDF036FC /* RNBackgroundTimer.xcodeproj */,
 				37E977A866AF41A08E7875F2 /* RCTVideo.xcodeproj */,
+				A8E8F4575DB0497B9F1701DE /* RNBackgroundJob.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1324,6 +1329,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1338,6 +1344,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Debug;
@@ -1372,6 +1379,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1386,6 +1394,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Release;
@@ -1418,6 +1427,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Debug;
@@ -1449,6 +1459,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Release;
@@ -1492,6 +1503,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1506,6 +1518,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Debug;
@@ -1549,6 +1562,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1563,6 +1577,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Release;
@@ -1605,6 +1620,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1619,6 +1635,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Debug;
@@ -1661,6 +1678,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1675,6 +1693,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-job\ios",
 				);
 			};
 			name = Release;

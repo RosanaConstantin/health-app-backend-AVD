@@ -26,6 +26,7 @@
     "react-native-advanced-forms": "^1.1.6",
     "react-native-animatable": "^1.2.4",
     "react-native-app-intro-slider": "^0.2.4",
+    "react-native-background-job": "^2.1.1",
     "react-native-background-timer": "^2.0.1",
     "react-native-ble-manager": "^6.2.9",
     "react-native-bluetooth-serial": "^1.0.0-rc1",

@@ -23,6 +23,7 @@ import SettingsPage from './components/SettingsPage'
 import LocationPage from './components/LocationPage'
 import environment from "./environment";
 import BluetoothScanner from './components/BluetoothScanner'
+import BackgroundJob from 'react-native-background-job';
 
 function applicationInitialize() {
     class AppComponent extends React.Component {

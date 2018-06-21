@@ -3,6 +3,7 @@ package com.healthapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.rnfs.RNFSPackage;
@@ -39,6 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new BackgroundJobPackage(),
             new BackgroundTimerPackage(),
             new RNFSPackage(),
             new ImageResizerPackage(),
@@ -65,7 +67,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
-    startService(new Intent(this, DataCollectorService.class));
+    // startService(new Intent(this, DataCollectorService.class));
     SoLoader.init(this, /* native exopackage */ false);
   }
 }
