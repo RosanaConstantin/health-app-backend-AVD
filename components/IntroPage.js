@@ -5,6 +5,7 @@ import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native'
 import AppIntroSlider from 'react-native-app-intro-slider';
 import {Actions} from 'react-native-router-flux';
 import { Left } from 'native-base';
+import mock from "./mock/mock";
 
 const styles = StyleSheet.create({
   container: {
@@ -105,6 +106,7 @@ export default class IntroPage extends React.Component {
   }
 
   render() {
+    alert(mock.getValue());
     return (
       <View style={styles.container}>
         <AppIntroSlider

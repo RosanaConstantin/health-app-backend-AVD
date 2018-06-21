@@ -1,5 +1,9 @@
+import mock from "./components/mock/mock"
+
 const DataCollector = async (data) => {
-    console.log(data);
+    setInterval(function() {
+        mock.increment();
+    }, 1000)
 }
 
 export default DataCollector;
