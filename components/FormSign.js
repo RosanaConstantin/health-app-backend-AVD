@@ -85,7 +85,7 @@ export default class FormInsideSign extends React.Component {
               .then((response) => response.json())
               .then((response) => {
                    if(response.result === 500){
-                       alert('Parolă și/sua username invalide!');
+                       alert('Parolă și/sau username invalide!');
                        
                   } else {
                     responseJson = JSON.stringify(response);
@@ -121,11 +121,17 @@ export default class FormInsideSign extends React.Component {
                                 notifications: userProfile.profile.notifications,
                                   steps: userProfile.profile.stepsGoal || 0,
                                   weight: userProfile.profile.weight || 53,
-                                  superviser: userProfile.profile.superviser,
+                                  superviser: userProfile.profile.superviser || true,
                                   superviserPhone: userProfile.profile.superviserPhone
                               };
                               global.notifications =[];
                               global.bagde = 0;
+                              global.locationGPS = {
+                                  latitude: 44.43,
+                                  longitude: 26.04
+                              };
+                              global.pedometru = userProfile.profile.steps;
+
                               Actions.dashboard();
                                 fetch(global.ip + 'api-notification-get', {
                                     method: 'POST',

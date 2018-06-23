@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import {
     Text,
-    StyleSheet
+    StyleSheet,
+    View
 } from 'react-native';
 import MapView from 'react-native-maps';
 import image from '../assets/flag-pink.png';
@@ -12,14 +13,21 @@ export default class LocationPage extends React.Component {
         super(props)
         this.state = {
             location: {
-                latitude: 44.436639,
-                longitude: 26.018673
+                latitude: global.locationGPS.latitude,
+                longitude: global.locationGPS.longitude
             }
         }
     }
+    componentWillMount(){
+        this.setState({
+            latitude: global.locationGPS.latitude,
+            longitude: global.locationGPS.longitude
+        });
+    }
+
     render() {
         return (
-            <MapView
+                <MapView
                 renderMarker={renderMarker}
                 initialRegion={{
                     latitude: 44.3503,
@@ -29,10 +37,11 @@ export default class LocationPage extends React.Component {
                 }}
                 style={StyleSheet.absoluteFillObject}>
 
-               <MapView.Marker
-                   image={image}
-                   coordinate={this.state.location}
-               />
+                <MapView.Marker
+                    image={image}
+                    size={30}
+                    coordinate={this.state.location}
+                />
             </MapView>
         );
     }
