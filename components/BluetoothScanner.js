@@ -13,11 +13,12 @@ import {
     ActivityIndicator,
     Image
 } from 'react-native'
-
+import BackgroundJob from "react-native-background-job";
 import Toast from '@remobile/react-native-toast'
 import BluetoothSerial from 'react-native-bluetooth-serial'
 
 import { Buffer } from 'buffer'
+import mock from "./mock/mock";
 global.Buffer = Buffer
 const iconv = require('iconv-lite')
 
@@ -90,6 +91,11 @@ class BluetoothScanner extends Component {
             this.setState({ connected: false })
         })
     }
+    componentDidUpdate(){
+        if(this.state.isEnabled){
+            global.bluetoothConnected = true;
+        }
+    }
 
     /**
      * [android]
@@ -128,8 +134,10 @@ class BluetoothScanner extends Component {
     toggleBluetooth (value) {
         if (value === true) {
             this.enable()
+            global.bluetoothConnected = true;
         } else {
             this.disable()
+            global.bluetoothConnected = false;
         }
     }
 
@@ -194,12 +202,10 @@ class BluetoothScanner extends Component {
                 Toast.showShortBottom(`Connected to device ${device.name}`)
                 this.setState({ device, connected: true, connecting: false })
 
-                BluetoothSerial.readFromDevice().then((data) => {
-                   var date = data.split(", ");
-                   global.latitudine = date[0].substr(9, 8);
-                   global.longitude = date[1].substr(9, 8);
-                 //  alert(Parse.float(global.latitude))
-                });
+                global.isYourWatch = device.name.localeCompare('HC-05');
+               // global.wasConnected = true;
+                //alert(global.isYourWatch);
+
             })
             .catch((err) => Toast.showShortBottom(err.message))
     }
@@ -209,7 +215,9 @@ class BluetoothScanner extends Component {
      */
     disconnect () {
         BluetoothSerial.disconnect()
-            .then(() => this.setState({ connected: false }))
+            .then(() => {
+                this.setState({connected: false});
+            })
             .catch((err) => Toast.showShortBottom(err.message))
     }
 

@@ -1,5 +1,5 @@
 let index = 0;
-
+ let BluetoohScanner = require('../BluetoothScanner');
 function increment() {
     index++;
 }

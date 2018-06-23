@@ -7,6 +7,7 @@ const BluetoothManager = {
                 .then(() => {
                     // Success code
                     alert('Your bluetooth is connected!');
+                    global.bluetoothConnected = true;
                 }).catch((error) => {
                     alert(error);
             });

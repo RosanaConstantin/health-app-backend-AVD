@@ -106,7 +106,7 @@ export default class IntroPage extends React.Component {
   }
 
   render() {
-    alert(mock.getValue());
+    //alert(mock.getValue());
     return (
       <View style={styles.container}>
         <AppIntroSlider
