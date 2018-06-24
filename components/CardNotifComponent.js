@@ -124,10 +124,10 @@ class CardNotif extends Component {
                         const deletingRow = this.state.activeRowKey;
                         Alert.alert(
                             'Alert',
-                            'Are you sure you want to delete ?',
+                            'Esti sigur că vrei să ștergi notificarea?',
                             [
-                                {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                                {text: 'Yes', onPress: () => {
+                                {text: 'Nu', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                                {text: 'Da', onPress: () => {
 
                                         this.props.parentList(this.props.indexOf);
                                     }},

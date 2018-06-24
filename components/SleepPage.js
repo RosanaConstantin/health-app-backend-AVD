@@ -124,9 +124,12 @@ export default class SleepPage extends React.Component {
 
                                     if(hourN < 0){
                                         hourN = -hourN;
+                                    } else if (hourN === 0) {
+                                        if(minuteN > 0){
+                                            hourN = 0;
+                                        }
                                     } else {
                                         hourN = 24-hourN;
-
                                     }
                                     if(minuteN <= 0 )
                                         minuteN = -minuteN
@@ -140,7 +143,29 @@ export default class SleepPage extends React.Component {
                                         diffHours: hourN,
                                         diffMinutes: minuteN,
                                     });
-
+                                    if (hourN === 0 && minuteN <= 15){
+                                        fetch(global.ip + 'api-notification-save', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                                                'X-Parse-Session-Token': global.sessionToken
+                                            },
+                                            body: JSON.stringify(
+                                                {message: "Mai ai mai puțin de "+ minuteN+" minute până când trebuie să te culci!"}
+                                            )
+                                        })
+                                            .then((response) => response.json())
+                                            .then((response) => {
+                                                alert(response.objectId)
+                                                global.notifications.push( {
+                                                    message: "Mai ai mai puțin de "+ minuteN+" minute până când trebuie să te culci!",
+                                                    objectId: response.objectId,
+                                                    wasRead: response.wasRead
+                                                })
+                                            })
+                                            .catch((error) => {alert(error)})
+                                    }
                                     var bedTimeH = hours + 8;
                                     if (bedTimeH > 24) {
                                         this.setState({bedTimeHours: -24 + bedTimeH});

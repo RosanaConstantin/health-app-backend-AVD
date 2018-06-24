@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
-
+import moment from 'moment';
 const styles = StyleSheet.create({
     container: {
         backgroundColor:"#ffdcd2",
@@ -60,15 +60,15 @@ const styles = StyleSheet.create({
         marginTop:15,
     }
 })
-
+const now = moment();
 export default class HeartRatePage extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            oxigenSaturation: 20,
-            heartRate: 50,
-            lastUpdated: 'în urmă cu un minut'
+            oxigenSaturation: global.oxygen,
+            heartRate: global.heartBeat,
+           lastUpdated: moment.duration(now.diff(global.time).toMinutes).hours()
         }
     }
 

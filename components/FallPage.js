@@ -4,7 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Entypo from 'react-native-vector-icons/Entypo'
 
 const phone = '';
-global.alarm = false;
+
 const styles = StyleSheet.create({
     container: {
         flex:1,
@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
         width:"100%",
     }
 })
+
 export default class FallPage extends React.Component {
     constructor(props){
         super(props);
@@ -232,7 +233,7 @@ export default class FallPage extends React.Component {
                                     <TextInput
                                         style={styles.input}
                                         onChangeText={(text) => this.phone = text}
-                                        //value={this.state.superviserPhone}
+                                        value={this.state.superviserPhone}
                                         maxLength={10}
                                     />
                                     <TouchableOpacity

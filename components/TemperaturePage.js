@@ -18,7 +18,7 @@ export default class TemperaturePage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            temperature: 0,
+            temperature: global.temperature,
             state:''
         }
     }
