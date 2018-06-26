@@ -109,7 +109,7 @@ export default class StepsPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-           steps: global.user.steps*100,
+            steps: global.user.steps,
             actualSteps: global.pedometru ? global.pedometru : 0,
             weight:global.user.weight
         }

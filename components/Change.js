@@ -19,6 +19,7 @@ import {Actions} from 'react-native-router-flux';
 import images from './images'
 import {Dropdown} from 'react-native-material-dropdown';
 import DatePicker from 'react-native-datepicker'
+import moment from "moment/moment";
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -131,6 +132,30 @@ export default class Change extends React.Component {
                 if (response.error) {
                     alert(response.error + ' Eroare la extragerea profilului');
                 } else {
+                    fetch(global.ip + 'api-activity-save', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                            'X-Parse-Session-Token': global.sessionToken
+                        },
+                        body: JSON.stringify({
+                            message: "Ai modificat profilul asociat contului curent!"
+                        })
+                    })
+                        .then((response) => response.json())
+                        .then((response) => {
+                            var date = moment(response.createdAt).format('LLL').split(',');
+                            global.activities.unshift( {
+                                message: "Ai modificat profilul asociat contului curent!",
+                                objectId: response.id,
+                                createdAt: {
+                                    day: date[0],
+                                    hour: date[1].replace("2018", "")
+                                }
+                            })
+                        })
+                        .catch((error) => alert(error.message))
                     Actions.dashboard();
                 }
             })

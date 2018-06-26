@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {TouchableOpacity, Image, Text, View, StyleSheet,Switch, TextInput,KeyboardAvoidingView } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
+import moment from "moment/moment";
 
 const phone = '';
 
@@ -153,6 +154,30 @@ export default class FallPage extends React.Component {
                     alert(response.error + ' Error while updating superviser phone!');
                 }
                 alert('Successfully updated superviser phone!');
+                fetch(global.ip + 'api-activity-save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                        'X-Parse-Session-Token': global.sessionToken
+                    },
+                    body: JSON.stringify({
+                        message: "Ai modificat numarul de telefon al supraveghetorului tau!"
+                    })
+                })
+                    .then((response) => response.json())
+                    .then((response) => {
+                        var date = moment(response.createdAt).format('LLL').split(',');
+                        global.activities.unshift( {
+                            message: "Ai modificat numarul de telefon al supraveghetorului tau!",
+                            objectId: response.id,
+                            createdAt: {
+                                day: date[0],
+                                hour: date[1].replace("2018", "")
+                            }
+                        })
+                    })
+                    .catch((error) => alert(error.message))
             })
             .catch((error) => {
                 alert(error);
@@ -181,11 +206,38 @@ export default class FallPage extends React.Component {
                 if (response.error) {
                     alert(response.error + ' Eroare în momentul extragerii profilului!');
                 } else {
+                    var state = '';
                     if(this.state.superviser){
-                        alert('Înscris cu succes!');
+                        alert('Abonat cu succes!');
+                        state = "abonat";
                     } else {
                         alert('Dezabonat cu succes');
+                        state = "dezabonat";
                     }
+                    fetch(global.ip + 'api-activity-save', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                            'X-Parse-Session-Token': global.sessionToken
+                        },
+                        body: JSON.stringify({
+                            message: "Serviciul de alerta in cas de urgenta: Te-ai " + state + " cu succes!"
+                        })
+                    })
+                        .then((response) => response.json())
+                        .then((response) => {
+                            var date = moment(response.createdAt).format('LLL').split(',');
+                            global.activities.unshift( {
+                                message: "Serviciul de alerta in cas de urgenta: Te-ai " + state + " cu succes!",
+                                objectId: response.id,
+                                createdAt: {
+                                    day: date[0],
+                                    hour: date[1].replace("2018", "")
+                                }
+                            })
+                        })
+                        .catch((error) => alert(error.message))
                 }
             })
             .catch((error) => {
