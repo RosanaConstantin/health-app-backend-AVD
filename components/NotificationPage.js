@@ -90,6 +90,7 @@ export default class NotificationPage extends React.Component {
                                         key={index}
                                         id={notif.objectId}
                                         message={notif.message}
+                                        date={notif.createdAt}
                                         indexOf={index}
                                         wasRead={notif.wasRead}
                                         parentList={this.refreshList}

@@ -12,16 +12,24 @@ import Feather from 'react-native-vector-icons/Feather'
 import Swipeout from 'react-native-swipeout';
 
 const styles = StyleSheet.create({
-    card:{
+    containerCard:{
         borderStyle:"solid",
         width:"95%",
         alignSelf:"center",
         backgroundColor: "#9897b4",
-        flexDirection:"row",
+        flexDirection:"column",
         padding:10,
         margin:20,
         borderRadius:15,
         alignItems:"flex-start"
+    },
+    date: {
+        marginLeft:5
+    },
+    dateContainer:{
+        flexDirection:"column",
+        alignItems:"center",
+        justifyContent:"center"
     },
     notif: {
         fontSize: 18,
@@ -31,6 +39,10 @@ const styles = StyleSheet.create({
     },
     icon: {
         marginLeft:5
+    },
+    card:{
+
+        flexDirection:"row"
     }
 });
 
@@ -42,6 +54,8 @@ class CardNotif extends Component {
             message: this.props.message,
             id: this.props.id,
             indexOf: this.props.indexOf,
+            day: this.props.date.day,
+            hour: this.props.date.hour,
             activeRowKey: null,
             wasRead: this.props.wasRead
         }
@@ -143,6 +157,7 @@ class CardNotif extends Component {
         }
         return (
             <Swipeout {...swipeSettings}>
+              <View style={styles.containerCard}>
                 <View style={styles.card}>
 
                     <Entypo
@@ -155,7 +170,12 @@ class CardNotif extends Component {
                         color={this.state.wasRead?'#646464':'#ff0026'}
                         onPress={() => this.readNotification(this.props.id, !this.state.wasRead)}
                         name="check-circle"/>
+
                 </View>
+                    <View style={styles.dateContainer}>
+                        <Text style={styles.date}>{this.state.hour }, {this.state.day } </Text>
+                    </View>
+              </View>
             </Swipeout>
 
         );

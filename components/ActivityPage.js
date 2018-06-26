@@ -5,11 +5,13 @@ import CardActivities from "./CardActivitiesComponent";
 const styles = StyleSheet.create({
     container: {
         backgroundColor:"#ffe4cd",
-        flex:1
+        flex:1,
+
     },
     containerScroll: {
         //  width: "100%",
         //height: "100%",
+        marginBottom:50
     },
     title: {
         color:"#ff9378",

@@ -8,11 +8,13 @@ import BluetoothSerial from 'react-native-bluetooth-serial'
 
 const AppComponent = applicationInitialize();
 var moment = require('moment');
+const isUpdated = false;
 
 function disconnectJob() {
     BackgroundJob.cancel({jobKey: 'worker'});
 }
 
+global.isSet = false;
 function myJob() {
     BluetoothSerial.readFromDevice().then((data) => {
         var date = JSON.parse(data);
@@ -40,14 +42,21 @@ function myJob() {
                 })
                 .then((response) => response.json())
                 .then((response) => {
-                    global.notifications.push( {
+                    var date = moment(response.createdAt).format('LLL').split(',');
+
+                    global.notifications.unshift( {
                         message: "Temperatura a iesit din parametrii normali! Verifica pagina dedicata!",
                         objectId: response.id,
-                        wasRead: response.wasRead
+                        wasRead: response.wasRead,
+                        createdAt: {
+                            day: date[0],
+                            hour: date[1].replace("2018 ", "")
+                        }
                     })
                 })
                 .catch((error) => alert(error.message))
         }
+
         global.pedometru = global.pedometru + date.steps;
         if(global.pedometru > global.user.steps){
             fetch(global.ip + 'api-notification-save', {
@@ -63,10 +72,43 @@ function myJob() {
             })
                 .then((response) => response.json())
                 .then((response) => {
-                    global.notifications.push( {
+                    var date = moment(response.createdAt).format('LLL').split(',');
+
+                    global.notifications.unshift( {
                         message: "Ti-ai atins telul!!!!! Felicitari!",
                         objectId: response.id,
-                        wasRead: response.wasRead
+                        wasRead: response.wasRead,
+                        createdAt: {
+                            day: date[0],
+                            hour: date[1].replace("2018 ", "")
+                        }
+                    })
+                })
+                .catch((error) => alert(error.message))
+        }
+
+        if( global.pedometru > 1000 && !global.isSet){
+            fetch(global.ip + 'api-activity-save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                    'X-Parse-Session-Token': global.sessionToken
+                },
+                body: JSON.stringify({
+                    message: "Ai facut primii 1000 de pasi!"
+                })
+            })
+                .then((response) => response.json())
+                .then((response) => {
+                    var date = moment(response.createdAt).format('LLL').split(',');
+                    global.activities.unshift( {
+                        message:"Ai facut primii 1000 de pasi!",
+                        objectId: response.id,
+                        createdAt: {
+                            day: date[0],
+                            hour: date[1].replace("2018 ", "")
+                        }
                     })
                 })
                 .catch((error) => alert(error.message))
@@ -90,10 +132,15 @@ function myJob() {
             })
                 .then((response) => response.json())
                 .then((response) => {
-                    global.activities.push( {
+                    var date = moment(response.createdAt).format('LLL').split(',');
+
+                    global.activities.unshift( {
                         message:"Ti-ai masurat pulsul si saturatia oxigenului!",
                         objectId: response.id,
-                        wasRead: response.wasRead
+                        createdAt: {
+                            day: date[0],
+                            hour: date[1].replace("2018 ", "")
+                        }
                     })
                 })
                 .catch((error) => alert(error.message))
@@ -112,10 +159,16 @@ function myJob() {
                 })
                     .then((response) => response.json())
                     .then((response) => {
-                        global.notifications.push( {
+                        var date = moment(response.createdAt).format('LLL').split(',');
+
+                        global.notifications.unshift( {
                             message: "Pulsul este prea mic!! Viziteaza un medic!",
                             objectId: response.id,
-                            wasRead: response.wasRead
+                            wasRead: response.wasRead,
+                            createdAt: {
+                                day: date[0],
+                                hour: date[1].replace("2018 ", "")
+                            }
                         })
                     })
                     .catch((error) => alert(error.message))
@@ -134,10 +187,16 @@ function myJob() {
                 })
                     .then((response) => response.json())
                     .then((response) => {
-                        global.notifications.push( {
+                        var date = moment(response.createdAt).format('LLL').split(',');
+
+                        global.notifications.unshift( {
                             message: "Pulsul este prea mare!! Viziteaza un medic!",
                             objectId: response.id,
-                            wasRead: response.wasRead
+                            wasRead: response.wasRead,
+                            createdAt: {
+                                day: date[0],
+                                hour: date[1].replace("2018 ", "")
+                            }
                         })
                     })
                     .catch((error) => alert(error.message))
@@ -190,10 +249,16 @@ function myJob() {
                             })
                                 .then((response) => response.json())
                                 .then((response) => {
-                                    global.activities.push( {
+                                    var date = moment(response.createdAt).format('LLL').split(',');
+
+                                    global.activities.unshift( {
                                         message:"Ai cazut! Ai grija pe viitor!",
                                         objectId: response.id,
-                                        wasRead: response.wasRead
+                                        createdAt: {
+                                            day: date[0],
+                                            hour: date[1].replace("2018 ", "")
+                                        }
+
                                     })
                                 })
                                 .catch((error) => alert(error.message))
@@ -210,7 +275,7 @@ function updateSteps(){
         var start = moment().set({hour: 0, minute: 0, second: 0, millisecond: 0});
         var end = moment().set({hour: 0, minute: 1, second: 30, millisecond: 0});
         var time = moment();
-        if (time > start && time < end) {
+        if (time >= start && time <= end) {
             global.pedometru = 0;
             fetch(global.ip + 'api-user-update-profile', {
                 method: 'POST',
@@ -237,7 +302,7 @@ BackgroundJob.register({
 });
 BackgroundJob.schedule({
     jobKey: 'updateSteps',
-    period: 10000,
+    period: 60000,
     exact: true,
     allowExecutionInForeground: true
 });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, PanResponder , TouchableOpacity,View, Text, TextInput, Image} from 'react-native';
 import ProgressCircle from 'react-native-progress-circle'
-
+import moment from 'moment';
 
 const styles = StyleSheet.create({
     container: {
@@ -134,11 +134,38 @@ export default class StepsPage extends React.Component {
             .then((response) => response.json())
             .then((response) => {
                 if (response.error) {
-                    alert(response.error + ' Error while setting your goal!');
+                    alert(response.error + ' Eroare in salvarea telului');
                 } else {
                     alert(this.state.steps)
-                    alert('Successfully goal set!');
+                    alert('Tel salvat cu succes!');
+                    fetch(global.ip + 'api-activity-save', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                            'X-Parse-Session-Token': global.sessionToken
+                        },
+                        body:JSON.stringify({
+                                message: "Tocmai ti-ai setat un nou tel pentru pedometru! Nu ceda pana nu il atingi!"
+
+                        })
+                    })
+                        .then((response) => response.json())
+                        .then((response) => {
+                            var date = moment(response.createdAt).format('LLL').split(',');
+                            global.activities.unshift({
+                                message: "Tocmai ti-ai setat un nou tel pentru pedometru! Nu ceda pana nu il atingi!",
+                                objectId: response.id,
+                                createdAt: {
+                                    day: date[0],
+                                    hour: date[1].replace("2018 ", "")
+                                }
+
+                            })
+                        })
+                        .catch((error) => alert(error.message))
                 }
+
             })
             .catch((error) => {
                 alert(error);

@@ -5,6 +5,7 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import Icon from './Icon'
 import InfoText from './InfoText'
 import { Actions } from 'react-native-router-flux';
+import moment from 'moment';
 
 const styles = StyleSheet.create({
   scroll: {
@@ -69,11 +70,39 @@ export default class SettingsPage extends React.Component {
               if (response.error) {
                   alert(response.error + ' Eroare în timpul apelării serviciului de notificări');
               } else {
+                  var state = "";
                   if(this.state.pushNotifications){
                       alert('Abonat cu succes la notificări');
+                      state = "abonat";
+
                   } else {
                       alert('Dezabonat cu succes la notificări');
+                      state = "dezabonat";
                   }
+                  fetch(global.ip + 'api-activity-save', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                          'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                          'X-Parse-Session-Token': global.sessionToken
+                      },
+                      body: JSON.stringify({
+                          message: "Serviciul de notificari: Tocmai te-ai" + state + "cu succes!"
+                      })
+                  })
+                      .then((response) => response.json())
+                      .then((response) => {
+                          var date = moment(response.createdAt).format('LLL').split(',');
+                          global.activities.unshift( {
+                              message: "Serviciul de notificari: Tocmai te-ai " + state + " cu succes!",
+                              objectId: response.id,
+                              createdAt: {
+                                 day: date[0],
+                                  hour: date[1].replace("2018", "")
+                             }
+                          })
+                      })
+                      .catch((error) => alert(error.message))
               }
           })
           .catch((error) => {
