@@ -155,7 +155,27 @@ export default class FormInsideSign extends React.Component {
                                                 }
                                             }
                                             global.badge = lenght;
-                                        }
+                                            fetch(global.ip + 'api-activity-get', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json',
+                                                    'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                                                    'X-Parse-Session-Token': global.sessionToken
+                                                }
+                                            })
+                                                .then((response) => response.json())
+                                                .then((response) => {
+                                                    if (response.error) {
+                                                        alert(response.error + ' Eroare la extragerea ativitatilor!');
+                                                    } else {
+                                                        global.activities = response.result;
+                                                    }
+                                                })
+                                                .catch((error) => {
+                                                    alert(error);
+                                                })
+                                                .done()
+                                    }
                                     })
                             }
                           })

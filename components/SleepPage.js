@@ -119,24 +119,27 @@ export default class SleepPage extends React.Component {
                                 selectedMinutes={selectedMinutes}
                                 onChange={(hours, minutes) => {
                                     var now = moment();
-                                    var hourN = now.get('hours') - hours;
-                                    var minuteN = now.get('minutes') - minutes;
+                                    var hourN = - now.get('hours') + hours;
+                                    var minuteN = - now.get('minutes') + minutes;
 
                                     if(hourN < 0){
                                         hourN = -hourN;
+                                        if(minuteN <= 0 )
+                                            minuteN = -minuteN
+                                        else if (minuteN > 0)
+                                        {
+                                            hourN--;
+                                            minuteN = 60 - minuteN;
+                                        }
                                     } else if (hourN === 0) {
                                         if(minuteN > 0){
                                             hourN = 0;
+                                        } else {
+                                            alert("Nu poti dormi in trecut!");
+                                            return;
                                         }
                                     } else {
                                         hourN = 24-hourN;
-                                    }
-                                    if(minuteN <= 0 )
-                                        minuteN = -minuteN
-                                    else if (minuteN > 0)
-                                    {
-                                        hourN--;
-                                        minuteN = 60 - minuteN;
                                     }
 
                                     this.setState({
@@ -144,7 +147,7 @@ export default class SleepPage extends React.Component {
                                         diffMinutes: minuteN,
                                     });
                                     if (hourN === 0 && minuteN <= 15){
-                                        fetch('http://192.168.1.101:1337/parse/functions/api-notification-save', {
+                                        fetch(global.ip + 'api-notification-save', {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json',

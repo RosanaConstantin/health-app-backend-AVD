@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Text, ScrollView, View, StyleSheet} from 'react-native';
 import CardActivities from "./CardActivitiesComponent";
-import * as Progress from 'react-native-progress';
 
 const styles = StyleSheet.create({
     container: {
@@ -31,41 +30,12 @@ export default class ActivityPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-           activities: global.activities,
-            isLoading: true
+           activities: global.activities
         }
     }
 
-    componentDidMount(){
-        fetch(global.ip + 'api-activity-get', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
-                'X-Parse-Session-Token': global.sessionToken
-            }
-        })
-            .then((response) => response.json())
-            .then((response) => {
-                if (response.error) {
-                    alert(response.error + ' Error while getting user activities!');
-                } else {
-                    this.setState({activities: response.result});
-                    global.activities.concat(response.result);
-                    this.setState({isLoading: false})
-                }
-            })
-            .catch((error) => {
-                alert(error);
-            })
-            .done()
-        }
-
     render() {
         return (
-            this.state.isLoading ? (
-                <Progress.Circle size={30} indeterminate={true} style={{marginTop:"50%", marginLeft:"48%"}} />
-            ) : (
             this.state.activities.length === 0 ? (
                 <View>
                     <Text style={styles.warningText}>Încă nu ai activități!</Text>
@@ -87,8 +57,5 @@ export default class ActivityPage extends React.Component {
                 </View>
             )
         )
-            )
-
-
     }
   }
