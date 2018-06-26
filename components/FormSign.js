@@ -125,6 +125,7 @@ export default class FormInsideSign extends React.Component {
                                   superviserPhone: userProfile.profile.superviserPhone
                               };
                               global.notifications =[];
+                              global.activities =[];
                               global.bagde = 0;
                               global.locationGPS = {
                                   latitude: 44.43,

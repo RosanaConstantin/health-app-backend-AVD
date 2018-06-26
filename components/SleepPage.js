@@ -144,7 +144,7 @@ export default class SleepPage extends React.Component {
                                         diffMinutes: minuteN,
                                     });
                                     if (hourN === 0 && minuteN <= 15){
-                                        fetch(global.ip + 'api-notification-save', {
+                                        fetch('http://192.168.1.101:1337/parse/functions/api-notification-save', {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json',
@@ -157,10 +157,9 @@ export default class SleepPage extends React.Component {
                                         })
                                             .then((response) => response.json())
                                             .then((response) => {
-                                                alert(response.objectId)
                                                 global.notifications.push( {
                                                     message: "Mai ai mai puțin de "+ minuteN+" minute până când trebuie să te culci!",
-                                                    objectId: response.objectId,
+                                                    objectId: response.id,
                                                     wasRead: response.wasRead
                                                 })
                                             })

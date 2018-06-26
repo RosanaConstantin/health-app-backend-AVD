@@ -13,12 +13,12 @@ import {
     ActivityIndicator,
     Image
 } from 'react-native'
-import BackgroundJob from "react-native-background-job";
+
 import Toast from '@remobile/react-native-toast'
 import BluetoothSerial from 'react-native-bluetooth-serial'
 
 import { Buffer } from 'buffer'
-import mock from "./mock/mock";
+
 global.Buffer = Buffer
 const iconv = require('iconv-lite')
 

@@ -31,7 +31,7 @@ export default class ActivityPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-           activities: [],
+           activities: global.activities,
             isLoading: true
         }
     }
@@ -51,6 +51,7 @@ export default class ActivityPage extends React.Component {
                     alert(response.error + ' Error while getting user activities!');
                 } else {
                     this.setState({activities: response.result});
+                    global.activities.concat(response.result);
                     this.setState({isLoading: false})
                 }
             })

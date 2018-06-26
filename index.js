@@ -16,7 +16,6 @@ function disconnectJob() {
 function myJob() {
     BluetoothSerial.readFromDevice().then((data) => {
         var date = JSON.parse(data);
-        alert(date.detection)
         if(data.latitude !== 0)
             global.locationGPS.latitude = date.latitude;
         else
@@ -27,15 +26,126 @@ function myJob() {
             global.locationGPS.longitude = 26.047752;
 
         global.temperature = date.temperature;
+        if(date.temperature <= 32.1 || date.temperature >= 40.2){
+            fetch(global.ip + 'api-notification-save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                    'X-Parse-Session-Token': global.sessionToken
+                },
+                body: JSON.stringify({
+                     message: "Temperatura a iesit din parametrii normali! Verifica pagina dedicata!"
+                 })
+                })
+                .then((response) => response.json())
+                .then((response) => {
+                    global.notifications.push( {
+                        message: "Temperatura a iesit din parametrii normali! Verifica pagina dedicata!",
+                        objectId: response.id,
+                        wasRead: response.wasRead
+                    })
+                })
+                .catch((error) => alert(error.message))
+        }
         global.pedometru = global.pedometru + date.steps;
+        if(global.pedometru > global.user.steps){
+            fetch(global.ip + 'api-notification-save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                    'X-Parse-Session-Token': global.sessionToken
+                },
+                body: JSON.stringify({
+                    message: "Ti-ai atins telul!!!!! Felicitari!"
+                })
+            })
+                .then((response) => response.json())
+                .then((response) => {
+                    global.notifications.push( {
+                        message: "Ti-ai atins telul!!!!! Felicitari!",
+                        objectId: response.id,
+                        wasRead: response.wasRead
+                    })
+                })
+                .catch((error) => alert(error.message))
+        }
 
         if(date.oxygen !== 0 || date.heartBeat !== 0) {
             global.oxygen = date.oxygen;
             global.heartBeat = date.heartBeat;
             global.time = moment();
+
+            fetch(global.ip + 'api-activity-save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                    'X-Parse-Session-Token': global.sessionToken
+                },
+                body: JSON.stringify({
+                    message: "Ti-ai masurat pulsul si saturatia oxigenului!"
+                })
+            })
+                .then((response) => response.json())
+                .then((response) => {
+                    global.activities.push( {
+                        message:"Ti-ai masurat pulsul si saturatia oxigenului!",
+                        objectId: response.id,
+                        wasRead: response.wasRead
+                    })
+                })
+                .catch((error) => alert(error.message))
+
+            if(global.heartBeat < 50) {
+                fetch(global.ip + 'api-notification-save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                        'X-Parse-Session-Token': global.sessionToken
+                    },
+                    body: JSON.stringify({
+                        message: "Pulsul este prea mic!! Viziteaza un medic!"
+                    })
+                })
+                    .then((response) => response.json())
+                    .then((response) => {
+                        global.notifications.push( {
+                            message: "Pulsul este prea mic!! Viziteaza un medic!",
+                            objectId: response.id,
+                            wasRead: response.wasRead
+                        })
+                    })
+                    .catch((error) => alert(error.message))
+
+            } else if (global.heartBeat > 120){
+                fetch(global.ip + 'api-notification-save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                        'X-Parse-Session-Token': global.sessionToken
+                    },
+                    body: JSON.stringify({
+                        message: "Pulsul este prea mare!! Viziteaza un medic!"
+                    })
+                })
+                    .then((response) => response.json())
+                    .then((response) => {
+                        global.notifications.push( {
+                            message: "Pulsul este prea mare!! Viziteaza un medic!",
+                            objectId: response.id,
+                            wasRead: response.wasRead
+                        })
+                    })
+                    .catch((error) => alert(error.message))
+
+            }
         }
 
-        fetch(global.ip + 'api-user-update-steps', {
+        fetch(global.ip + 'api-user-update-profile', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,7 +153,9 @@ function myJob() {
                 'X-Parse-Session-Token': global.sessionToken
             },
             body: JSON.stringify({
-                steps: global.pedometru
+                profile: {
+                    steps: global.pedometru
+                }
             })
         })
             .then((response) => response.json())
@@ -53,7 +165,6 @@ function myJob() {
             global.alarm = true;
             if(global.user.superviser) {
                 if(global.user.superviserPhone){
-                    alert('daa')
                     fetch(global.ip + 'api-user-alert', {
                         method: 'POST',
                         headers: {
@@ -65,7 +176,28 @@ function myJob() {
                             }
                         )
                     })
-                        .then((response) => {response.json()})
+                        .then((response) => {response.json();
+                            fetch(global.ip + 'api-activity-save', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                                    'X-Parse-Session-Token': global.sessionToken
+                                },
+                                body: JSON.stringify({
+                                    message: "Ai cazut! Ai grija pe viitor!"
+                                })
+                            })
+                                .then((response) => response.json())
+                                .then((response) => {
+                                    global.activities.push( {
+                                        message:"Ai cazut! Ai grija pe viitor!",
+                                        objectId: response.id,
+                                        wasRead: response.wasRead
+                                    })
+                                })
+                                .catch((error) => alert(error.message))
+                        })
                         .catch((error) => alert(error))
                 }
             }
@@ -74,33 +206,38 @@ function myJob() {
 }
 
 function updateSteps(){
-    var start = moment().set({hour:0,minute:0,second:0,millisecond:0});
-    var end = moment().set({hour:0,minute:1,second:0,millisecond:0});
-    var time = moment();
-    if(time > start && time < end ){
-        fetch(global.ip + 'api-user-update-steps', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
-                'X-Parse-Session-Token': global.sessionToken
-            },
-            body: JSON.stringify({
-                steps: 0
+    if(global.sessionToken) {
+        var start = moment().set({hour: 0, minute: 0, second: 0, millisecond: 0});
+        var end = moment().set({hour: 0, minute: 1, second: 30, millisecond: 0});
+        var time = moment();
+        if (time > start && time < end) {
+            global.pedometru = 0;
+            fetch(global.ip + 'api-user-update-profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                    'X-Parse-Session-Token': global.sessionToken
+                },
+                body: JSON.stringify({
+                    profile: {
+                        steps: 1  //ai grija sa il setezi 0, nu 1
+                    }
+                })
             })
-        })
-            .then((response) => response.json())
-            .catch((error) => alert(error.message))
+                .then((response) => (response.json()))
+                .catch((error) => alert(error.message))
+        }
     }
 }
 
 BackgroundJob.register({
     jobKey: "updateSteps",
-    job: () => updateSteps
+    job: () => {updateSteps();}
 });
 BackgroundJob.schedule({
     jobKey: 'updateSteps',
-    period: 60000,
+    period: 10000,
     exact: true,
     allowExecutionInForeground: true
 });
@@ -125,5 +262,5 @@ BackgroundJob.schedule({
     allowExecutionInForeground: true
 });
 
-AppRegistry.registerHeadlessTask('DataCollector', () => DataCollector);
+//AppRegistry.registerHeadlessTask('DataCollector', () => DataCollector);
 AppRegistry.registerComponent('HealthApp', () => AppComponent);
