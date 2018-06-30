@@ -20,43 +20,45 @@ function myJob() {
     BluetoothSerial.readFromDevice().then((data) => {
         if (data[0] === "." && data[data.length-1] === '.') {
             var date = JSON.parse(data.substr(1,data.length-2));
-            if (data.latitude !== 0)
+            if (date.latitude !== 0)
                 global.locationGPS.latitude = date.latitude;
             else
                 global.locationGPS.latitude = 44.435732;
-            if (data.longitude !== 0)
+            if (date.longitude !== 0)
                 global.locationGPS.longitude = date.longitude;
             else
                 global.locationGPS.longitude = 26.047752;
 
-            global.temperature = date.temperature;
-            if (date.temperature <= 32.1 || date.temperature >= 40.2) {
-                fetch(global.ip + 'api-notification-save', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
-                        'X-Parse-Session-Token': global.sessionToken
-                    },
-                    body: JSON.stringify({
-                        message: "Temperatura a iesit din parametrii normali! Verifica pagina dedicata!"
-                    })
-                })
-                    .then((response) => response.json())
-                    .then((response) => {
-                        var date = moment(response.createdAt).format('LLL').split(',');
-
-                        global.notifications.unshift({
-                            message: "Temperatura a iesit din parametrii normali! Verifica pagina dedicata!",
-                            objectId: response.result.objectId,
-                            wasRead: false,
-                            createdAt: {
-                                day: date[0],
-                                hour: date[1].replace("2018 ", "")
-                            }
+            if(date.temperature !== 0) {
+                global.temperature = date.temperature;
+                if (date.temperature <= 32.1 || date.temperature >= 40.2) {
+                    fetch(global.ip + 'api-notification-save', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Parse-Application-Id': '216TmAzCS6&W8R8jNkwE#KDy1k3#m9Vc',
+                            'X-Parse-Session-Token': global.sessionToken
+                        },
+                        body: JSON.stringify({
+                            message: "Temperatura a iesit din parametrii normali! Verifica pagina dedicata!"
                         })
                     })
-                    .catch((error) => alert(error.message))
+                        .then((response) => response.json())
+                        .then((response) => {
+                            var date = moment(response.createdAt).format('LLL').split(',');
+
+                            global.notifications.unshift({
+                                message: "Temperatura a iesit din parametrii normali! Verifica pagina dedicata!",
+                                objectId: response.result.objectId,
+                                wasRead: false,
+                                createdAt: {
+                                    day: date[0],
+                                    hour: date[1].replace("2018 ", "")
+                                }
+                            })
+                        })
+                        .catch((error) => alert(error.message))
+                }
             }
 
             global.pedometru = global.pedometru + date.steps;
