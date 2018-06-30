@@ -221,7 +221,7 @@ export default class StepsPage extends React.Component {
                         <Image
                             style={{width:40, height:40, alignSelf:"center"}}
                             source={require('../assets/calories.png')}/>
-                            <Text style={[styles.statisticsText, {marginTop:10}]}>{( 300 * this.state.actualSteps / 10000).toPrecision(2)}</Text>
+                            <Text style={[styles.statisticsText, {marginTop:10}]}>{((0.373* this.state.actualSteps /1000)*10.5/0.37).toPrecision(2)}</Text>
 
                         <Text style={[styles.details, {marginTop:30}]}>*Pentru o medie de 2200 pași/milă</Text>
                     </View>
@@ -230,7 +230,7 @@ export default class StepsPage extends React.Component {
                         <Image
                             style={{width:50, height:50, alignSelf:"center"}}
                             source={require('../assets/distance.png')}/>
-                            <Text style={[styles.statisticsText , {marginTop:6}]}>{((0.57*this.state.weight/2200) * this.state.actualSteps).toPrecision(2)}</Text>
+                            <Text style={[styles.statisticsText , {marginTop:6}]}>{((0.373/1000) * this.state.actualSteps).toPrecision(2)}</Text>
                         <Text style={[styles.details, {marginTop:31}]}>*Pentru o medie de 2200 pași/milă</Text>
                     </View>
                 </View>
