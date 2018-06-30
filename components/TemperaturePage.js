@@ -35,6 +35,8 @@ export default class TemperaturePage extends React.Component {
     }
 
     render() {
+        let height = 3.5 * global.temperature;
+        let marginTop = 215-height;
         return (
             <View style={styles.container} >
 
@@ -100,7 +102,11 @@ export default class TemperaturePage extends React.Component {
                             source={require('../assets/empty-thermometer.png')}
                             style={styles.thermometer}
                         >
-                            <View style={styles.SquareVariabilShapeView}></View>
+                            <View style={{ width:32,
+                                backgroundColor:"#f90e0f",
+                                marginTop,
+                                marginLeft:22,
+                                height}}></View>
                             <View style={styles.SquareShapeView}></View>
                             <View style={styles.CircleShapeView}></View>
                         </ImageBackground>
@@ -127,10 +133,6 @@ export default class TemperaturePage extends React.Component {
         );
     }
 }
-global.temperature = 40;
-const height = 3.5 * global.temperature;
-const marginTop = 215-height;
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -187,11 +189,7 @@ const styles = StyleSheet.create({
         marginLeft:22,
     },
     SquareVariabilShapeView:{
-        width:32,
-        backgroundColor:"#f90e0f",
-        marginTop,
-        marginLeft:22,
-        height,
+
     },
     gradeO: {
         fontSize:30,

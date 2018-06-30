@@ -87,7 +87,7 @@ export default class SettingsPage extends React.Component {
                           'X-Parse-Session-Token': global.sessionToken
                       },
                       body: JSON.stringify({
-                          message: "Serviciul de notificari: Tocmai te-ai" + state + "cu succes!"
+                          message: "Serviciul de notificari: Tocmai te-ai " + state + " cu succes!"
                       })
                   })
                       .then((response) => response.json())
@@ -95,7 +95,7 @@ export default class SettingsPage extends React.Component {
                           var date = moment(response.createdAt).format('LLL').split(',');
                           global.activities.unshift( {
                               message: "Serviciul de notificari: Tocmai te-ai " + state + " cu succes!",
-                              objectId: response.id,
+                              objectId: response.result.objectId,
                               createdAt: {
                                  day: date[0],
                                   hour: date[1].replace("2018", "")

@@ -177,8 +177,8 @@ export default class SleepPage extends React.Component {
                                                 var date = moment(response.createdAt).format('LLL').split(',');
                                                 global.notifications.unshift({
                                                     message: "Mai ai mai puțin de " + minuteN + " minute până când trebuie să te culci!",
-                                                    objectId: response.id,
-                                                    wasRead: response.wasRead,
+                                                    objectId: response.result.objectId,
+                                                    wasRead: false,
                                                     createdAt: {
                                                         day: date[0],
                                                         hour: date[1].replace("2018 ", "")
@@ -193,7 +193,7 @@ export default class SleepPage extends React.Component {
                                                         'X-Parse-Session-Token': global.sessionToken
                                                     },
                                                     body: JSON.stringify(
-                                                        {message: "Tocmai ti-ai setat ora de culcare" + {selectedHours} + ":" + {selectedMinutes} + "!! Respect-o!"}
+                                                        {message: "Tocmai ti-ai setat ora de culcare " + selectedHours + ":" + selectedMinutes + "!! Respect-o!"}
                                                     )
                                                 })
                                                     .then((response) => response.json())
@@ -201,8 +201,8 @@ export default class SleepPage extends React.Component {
                                                         var date = moment(response.createdAt).format('LLL').split(',');
 
                                                         global.activities.unshift({
-                                                            message: "Tocmai ti-ai setat ora de culcare " + JSON.stringify(selectedHours) + ":" +JSON.stringify(selectedMinutes) + "!! Respect-o!",
-                                                            objectId: response.id,
+                                                            message: "Tocmai ti-ai setat ora de culcare " + selectedHours + ":" + selectedMinutes + "!! Respect-o!",
+                                                            objectId: response.result.objectId,
                                                             createdAt: {
                                                                 day: date[0],
                                                                 hour: date[1].replace("2018 ", "")

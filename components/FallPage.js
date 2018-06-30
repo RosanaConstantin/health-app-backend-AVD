@@ -170,7 +170,7 @@ export default class FallPage extends React.Component {
                         var date = moment(response.createdAt).format('LLL').split(',');
                         global.activities.unshift( {
                             message: "Ai modificat numarul de telefon al supraveghetorului tau!",
-                            objectId: response.id,
+                            objectId: response.result.objectId,
                             createdAt: {
                                 day: date[0],
                                 hour: date[1].replace("2018", "")
@@ -230,7 +230,7 @@ export default class FallPage extends React.Component {
                             var date = moment(response.createdAt).format('LLL').split(',');
                             global.activities.unshift( {
                                 message: "Serviciul de alerta in cas de urgenta: Te-ai " + state + " cu succes!",
-                                objectId: response.id,
+                                objectId: response.result.objectId,
                                 createdAt: {
                                     day: date[0],
                                     hour: date[1].replace("2018", "")

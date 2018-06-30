@@ -43,7 +43,7 @@ export default class NotificationPage extends React.Component {
     refreshList = (deletedKey) => {
         // global.notifications.splice(deletedKey,1);
         global.badge--;
-        var objectId = this.state.notifications[deletedKey].objectId;
+        var id = this.state.notifications[deletedKey].objectId;
         this.setState({notification: this.state.notifications.splice(deletedKey,1)});
         fetch(global.ip + 'api-notification-delete', {
             method: 'POST',
@@ -53,7 +53,7 @@ export default class NotificationPage extends React.Component {
                 'X-Parse-Session-Token': global.sessionToken
             },
             body: JSON.stringify(
-                {notificationId: objectId}
+                {notificationId: id  }
             )
         })
             .then((response) => response.json())

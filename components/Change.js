@@ -148,7 +148,7 @@ export default class Change extends React.Component {
                             var date = moment(response.createdAt).format('LLL').split(',');
                             global.activities.unshift( {
                                 message: "Ai modificat profilul asociat contului curent!",
-                                objectId: response.id,
+                                objectId: response.result.objectId,
                                 createdAt: {
                                     day: date[0],
                                     hour: date[1].replace("2018", "")

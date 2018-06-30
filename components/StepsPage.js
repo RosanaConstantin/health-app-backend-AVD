@@ -136,8 +136,9 @@ export default class StepsPage extends React.Component {
                 if (response.error) {
                     alert(response.error + ' Eroare in salvarea telului');
                 } else {
-                    alert(this.state.steps)
+                  //  alert(this.state.steps)
                     alert('Tel salvat cu succes!');
+                    global.user.steps = parseInt(this.state.steps);
                     fetch(global.ip + 'api-activity-save', {
                         method: 'POST',
                         headers: {
@@ -155,7 +156,7 @@ export default class StepsPage extends React.Component {
                             var date = moment(response.createdAt).format('LLL').split(',');
                             global.activities.unshift({
                                 message: "Tocmai ti-ai setat un nou tel pentru pedometru! Nu ceda pana nu il atingi!",
-                                objectId: response.id,
+                                objectId: response.result.objectId,
                                 createdAt: {
                                     day: date[0],
                                     hour: date[1].replace("2018 ", "")

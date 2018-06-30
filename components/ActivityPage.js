@@ -46,7 +46,7 @@ export default class ActivityPage extends React.Component {
                 <View style={styles.container}>
                     <Text style={styles.title}>Ultimele activități</Text>
                     <ScrollView style={styles.containerScroll}>
-                        {this.state.activities.map((activity, index) => {
+                        {this.state.activities.slice(0,19).map((activity, index) => {
                             return (
                                 <CardActivities
                                     key={index}

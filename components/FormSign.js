@@ -125,6 +125,7 @@ export default class FormInsideSign extends React.Component {
                                   superviserPhone: userProfile.profile.superviserPhone
                               };
                               global.notifications =[];
+                              global.temperature = 36.5;
                               global.activities =[];
                               global.bagde = 0;
                               global.locationGPS = {
