@@ -284,6 +284,7 @@ function updateSteps(){
         var end = moment().set({hour: 0, minute: 1, second: 30, millisecond: 0});
         var time = moment();
         if (time >= start && time <= end) {
+            global.goalAchieved = false;
             global.pedometru = 0;
             fetch(global.ip + 'api-user-update-profile', {
                 method: 'POST',
@@ -330,7 +331,7 @@ BackgroundJob.register({
 });
 BackgroundJob.schedule({
     jobKey: 'worker',
-    period: 1049,
+    period: 1055,
     exact: true,
     allowExecutionInForeground: true
 });

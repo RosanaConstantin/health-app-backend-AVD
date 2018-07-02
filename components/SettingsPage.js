@@ -170,9 +170,9 @@ export default class SettingsPage extends React.Component {
             .then((response) => response.json())
             .then((response) => {
                 if(response.result === 500){
-                    alert('Something went bad while logging out');
+                    alert('S-a produs o eroare!');
                 } else{
-                    alert('Successfully logged out')
+                    alert('Delogat cu succes!')
                     Actions.home();
                 }
             })
