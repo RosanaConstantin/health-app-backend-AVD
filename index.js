@@ -31,7 +31,7 @@ function myJob() {
 
             if(date.temperature !== 0) {
                 global.temperature = date.temperature;
-                if (date.temperature <= 36.1 || date.temperature >= 37.9) {
+                if (date.temperature <= 36.1 || date.temperature >= 40.9) {
                     fetch(global.ip + 'api-notification-save', {
                         method: 'POST',
                         headers: {
